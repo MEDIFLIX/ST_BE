@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ST_DASHBOARD?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/ST_DASHBOARD?useSSL=false
     username: ST_BE
     password: root
 
