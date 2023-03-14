@@ -16,6 +16,13 @@ spring:
       ddl-auto: create
     generate-ddl: true
 
+
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
 logging:
   level:
     sql: info
