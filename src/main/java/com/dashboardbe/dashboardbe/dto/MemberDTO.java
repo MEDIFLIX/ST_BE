@@ -8,14 +8,13 @@ import lombok.*;
 @ToString
 public class MemberDTO {
     private Long id;
-    private String memberEmail;
+    private String memberId;
     private String memberPassword;
     private String memberName;
 
     @Builder
-    public MemberDTO(Long id, String memberEmail, String memberPassword, String memberName) {
-        this.id = id;
-        this.memberEmail = memberEmail;
+    public MemberDTO(String memberId, String memberPassword, String memberName) {
+        this.memberId = memberId;
         this.memberPassword = memberPassword;
         this.memberName = memberName;
     }
