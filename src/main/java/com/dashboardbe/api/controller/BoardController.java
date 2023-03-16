@@ -1,12 +1,14 @@
 package com.dashboardbe.api.controller;
 
 import com.dashboardbe.api.service.BoardService;
-import com.dashboardbe.api.service.BoardServiceImpl;
 import com.dashboardbe.common.response.BaseResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +21,7 @@ public class BoardController {
 
     @ResponseBody
     @PostMapping(value = "save")
-    public ResponseEntity<BaseResponseBody<String>> saveBoard (
+    public ResponseEntity<BaseResponseBody<String>> saveBoard(
             HttpServletRequest request,
             String id
     ) {
