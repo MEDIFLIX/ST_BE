@@ -1,4 +1,4 @@
-package com.dashboardbe.dashboardbe.domain;
+package com.dashboardbe.domain;
 
 import lombok.Builder;
 import lombok.Getter;
