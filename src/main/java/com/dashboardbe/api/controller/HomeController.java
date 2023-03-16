@@ -1,8 +1,7 @@
-package com.dashboardbe.dashboardbe.controller;
+package com.dashboardbe.api.controller;
 
-import com.dashboardbe.dashboardbe.service.TestService;
+import com.dashboardbe.api.service.TestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

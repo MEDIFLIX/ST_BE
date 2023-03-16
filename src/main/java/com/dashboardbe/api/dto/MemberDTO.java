@@ -1,4 +1,4 @@
-package com.dashboardbe.dashboardbe.dto;
+package com.dashboardbe.api.dto;
 
 import com.dashboardbe.domain.MedicalDepartment;
 import lombok.*;

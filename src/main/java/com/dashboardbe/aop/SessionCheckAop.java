@@ -1,4 +1,4 @@
-package com.dashboardbe.dashboardbe.aop;
+package com.dashboardbe.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -19,7 +19,7 @@ public class SessionCheckAop {
     /**
      * "세션체크" 공통 관심사 AOP 처리
      */
-    @Around("@annotation(com.dashboardbe.dashboardbe.aop.LoginCheck)")
+    @Around("@annotation(com.dashboardbe.aop.LoginCheck)")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("=== Session Check Start ===");
         // 세션값 가져오기

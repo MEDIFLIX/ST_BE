@@ -1,8 +1,8 @@
-package com.dashboardbe.dashboardbe.service;
+package com.dashboardbe.api.service;
 
 import com.dashboardbe.domain.Member;
-import com.dashboardbe.dashboardbe.dto.MemberDTO;
-import com.dashboardbe.dashboardbe.repository.MemberRepository;
+import com.dashboardbe.api.dto.MemberDTO;
+import com.dashboardbe.api.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

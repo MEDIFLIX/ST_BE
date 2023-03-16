@@ -1,11 +1,11 @@
-package com.dashboardbe.dashboardbe.controller;
+package com.dashboardbe.api.controller;
 
-import com.dashboardbe.dashboardbe.dto.MemberDTO;
-import com.dashboardbe.dashboardbe.service.MemberService;
+import com.dashboardbe.api.dto.MemberDTO;
+import com.dashboardbe.api.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.dashboardbe.dashboardbe.aop;
+package com.dashboardbe.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

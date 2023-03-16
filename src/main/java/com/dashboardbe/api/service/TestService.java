@@ -1,6 +1,6 @@
-package com.dashboardbe.dashboardbe.service;
+package com.dashboardbe.api.service;
 
-import com.dashboardbe.dashboardbe.aop.LoginCheck;
+import com.dashboardbe.aop.LoginCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
