@@ -30,15 +30,15 @@ public class MemberController {
      */
     @PostMapping("/member/login")
     public String login(@RequestBody MemberDTO memberDTO, HttpServletRequest request) {
-        MemberDTO loginResult = memberService.login(memberDTO);
+        String loginId = memberService.login(memberDTO);
         // login 성공
-        if (loginResult != null) {
+        if (loginId != null) {
             // 세션이 있으면 존재하는 세션 반환
             // 세션이 없으면 신규 세션을 생성해서 반환
             HttpSession session = request.getSession();
             // 세션에 로그인 아이디 정보 저장
-            System.out.println(loginResult.getMemberId());
-            session.setAttribute("loginID", loginResult.getMemberId());
+            System.out.println(loginId);
+            session.setAttribute("loginID", loginId);
             System.out.println((String)session.getAttribute("loginID"));
             return session.getId();
         } else { // login 실패
@@ -55,6 +55,7 @@ public class MemberController {
         HttpSession session = request.getSession(false);
         // 세션이 존재하는 경우
         if (session != null) {
+            System.out.println("DFFFFFSAFDFSFADFDFSAFAS");
             session.invalidate(); // 세션 소멸
         }
         // 로그인 화면으로 리다이렉트 시킴

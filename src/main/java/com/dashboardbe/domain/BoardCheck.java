@@ -1,35 +1,34 @@
 package com.dashboardbe.domain;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import lombok.Data;
-
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
-public class Board {
+public class BoardCheck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    private String content;
-    private LocalDateTime localDateTime;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+    private Boolean isCheck;
 
     @Builder
-    public Board(Long id, Admin admin, String content, LocalDateTime localDateTime) {
+    public BoardCheck(Long id, Admin admin, Board board, Boolean isCheck) {
         this.id = id;
         this.admin = admin;
-        this.content = content;
-        this.localDateTime = localDateTime;
+        this.board = board;
+        this.isCheck = isCheck;
     }
 }

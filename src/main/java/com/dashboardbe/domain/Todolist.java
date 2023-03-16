@@ -1,21 +1,16 @@
 package com.dashboardbe.domain;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import lombok.Data;
-
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
-public class Board {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
+public class Todolist {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,13 +18,11 @@ public class Board {
     private Admin admin;
 
     private String content;
-    private LocalDateTime localDateTime;
 
     @Builder
-    public Board(Long id, Admin admin, String content, LocalDateTime localDateTime) {
+    public Todolist(Long id, Admin admin, String content) {
         this.id = id;
         this.admin = admin;
         this.content = content;
-        this.localDateTime = localDateTime;
     }
 }

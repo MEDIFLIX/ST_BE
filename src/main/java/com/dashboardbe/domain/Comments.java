@@ -1,35 +1,34 @@
 package com.dashboardbe.domain;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import lombok.Data;
-
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
-public class Board {
+public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
     private String content;
-    private LocalDateTime localDateTime;
 
     @Builder
-    public Board(Long id, Admin admin, String content, LocalDateTime localDateTime) {
+    public Comments(Long id, Admin admin, Board board, String content) {
         this.id = id;
         this.admin = admin;
+        this.board = board;
         this.content = content;
-        this.localDateTime = localDateTime;
     }
 }

@@ -6,31 +6,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Setter
 @Getter
-@Table(name = "member")
 @NoArgsConstructor
 public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @Column(name = "member_id")
+    private String id;
 
-    @Column(unique = true)
-    private String memberId;
+    private String pwd;
+    private String name;
+    private String phoneNumber;
 
-    @Column
-    private String memberPassword;
+    @Enumerated(value = EnumType.STRING)
+    private MedicalDepartment medicalDepartment;
 
-    @Column
-    private String memberName;
+    private String hospital;
+    private Boolean isMember;
+    private LocalDateTime createTime;
+    private LocalDateTime deleteTime;
 
     @Builder
-    public Member(Long id, String memberId, String memberPassword, String memberName) {
+    public Member(String id, String pwd, String name, String phoneNumber, MedicalDepartment medicalDepartment, String hospital) {
         this.id = id;
-        this.memberId = memberId;
-        this.memberPassword = memberPassword;
-        this.memberName = memberName;
+        this.pwd = pwd;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.medicalDepartment = medicalDepartment;
+        this.hospital = hospital;
+        this.isMember = true;
+        this.createTime = LocalDateTime.now();
+        this.deleteTime = null;
     }
 }
