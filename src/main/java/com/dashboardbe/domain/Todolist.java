@@ -20,8 +20,7 @@ public class Todolist {
     private String content;
 
     @Builder
-    public Todolist(Long id, Admin admin, String content) {
-        this.id = id;
+    public Todolist(Admin admin, String content) {
         this.admin = admin;
         this.content = content;
     }

@@ -1,5 +1,6 @@
 package com.dashboardbe.aop;
 
+import com.dashboardbe.common.exception.SessionBadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,8 +28,8 @@ public class SessionCheckAop {
         String memberId = (String)session.getAttribute("loginID");
         // 세션에 값이 없는 경우 처리
         if (memberId == null) {
-            log.info("=== Wrong Session ===");
-            throw new HttpStatusCodeException(HttpStatus.UNAUTHORIZED, "NO_LOGIN") {};
+            log.info("=== NO Session ===");
+            throw new SessionBadRequestException();
         }
         log.info("=== Session Check End ===");
         return joinPoint.proceed();

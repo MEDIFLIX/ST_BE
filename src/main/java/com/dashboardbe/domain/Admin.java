@@ -23,12 +23,12 @@ public class Admin {
     private LocalDateTime createTime;
 
     @Builder
-    public Admin(String id, String pwd, String name, String phoneNumber, String profile, LocalDateTime createTime) {
+    public Admin(String id, String pwd, String name, String phoneNumber, String profile) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.profile = profile;
-        this.createTime = createTime;
+        this.createTime = LocalDateTime.now();
     }
 }
