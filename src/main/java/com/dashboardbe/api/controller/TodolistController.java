@@ -2,7 +2,7 @@ package com.dashboardbe.api.controller;
 
 import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.TodoRequestDTO;
-import com.dashboardbe.api.dto.TodolistDTO;
+import com.dashboardbe.api.dto.TodoResponseDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.repository.TodolistRepository;
 import com.dashboardbe.api.service.TodolistService;
@@ -83,7 +83,7 @@ public class TodolistController {
                                 "존재하지 않는 메모입니다.",
                                 todolistId.toString()
                         ),
-                        HttpStatus.OK
+                        HttpStatus.NOT_FOUND
                 );
             }
         } else {
@@ -100,15 +100,15 @@ public class TodolistController {
 
     @GetMapping("/memo/list")
     @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<TodolistDTO>>> list(HttpSession session) {
+    public ResponseEntity<BaseResponseBody<List<TodoResponseDTO>>> list(HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
         Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
         // 올바른 관리자라면
         if (optionalAdmin.isPresent()) {
             Admin admin = optionalAdmin.get();
-            List<TodolistDTO> list = todolistService.list(admin);
-            return new ResponseEntity<BaseResponseBody<List<TodolistDTO>>>(
-                    new BaseResponseBody<List<TodolistDTO>>(
+            List<TodoResponseDTO> list = todolistService.list(admin);
+            return new ResponseEntity<BaseResponseBody<List<TodoResponseDTO>>>(
+                    new BaseResponseBody<List<TodoResponseDTO>>(
                             HttpStatus.OK.value(),
                             "성공",
                             list
@@ -116,8 +116,8 @@ public class TodolistController {
                     HttpStatus.OK
             );
         } else {
-            return new ResponseEntity<BaseResponseBody<List<TodolistDTO>>>(
-                    new BaseResponseBody<List<TodolistDTO>>(
+            return new ResponseEntity<BaseResponseBody<List<TodoResponseDTO>>>(
+                    new BaseResponseBody<List<TodoResponseDTO>>(
                             HttpStatus.NOT_FOUND.value(),
                             "존재하지 않는 Admin ID입니다.",
                             null

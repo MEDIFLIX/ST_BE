@@ -1,7 +1,7 @@
 package com.dashboardbe.api.service;
 
 import com.dashboardbe.api.dto.TodoRequestDTO;
-import com.dashboardbe.api.dto.TodolistDTO;
+import com.dashboardbe.api.dto.TodoResponseDTO;
 import com.dashboardbe.api.repository.TodolistRepository;
 import com.dashboardbe.domain.Admin;
 import com.dashboardbe.domain.Todolist;
@@ -27,11 +27,11 @@ public class TodolistService {
         todolistRepository.delete(todolist);
     }
 
-    public List<TodolistDTO> list(Admin admin) {
+    public List<TodoResponseDTO> list(Admin admin) {
         List<Todolist> todolists = todolistRepository.findByAdminId(admin.getId());
-        List<TodolistDTO> list = new ArrayList<>();
+        List<TodoResponseDTO> list = new ArrayList<>();
         for (Todolist todolist : todolists) {
-            TodolistDTO todolistDTO = TodolistDTO.builder()
+            TodoResponseDTO todolistDTO = TodoResponseDTO.builder()
                     .id(todolist.getId())
                     .content(todolist.getContent())
                     .build();

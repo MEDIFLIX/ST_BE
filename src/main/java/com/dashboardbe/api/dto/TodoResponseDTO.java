@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class TodolistDTO {
+public class TodoResponseDTO {
     private Long id;
     private String content;
 
     @Builder
-    public TodolistDTO(Long id, String content) {
+    public TodoResponseDTO(Long id, String content) {
         this.id = id;
         this.content = content;
     }
