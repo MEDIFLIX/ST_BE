@@ -25,18 +25,16 @@ public class Contents {
     private Category category;
 
     private String title;
-    private String thumbnail;
 
     private Long hits;
     private LocalDateTime uploadDate;
 
     @Builder
-    public Contents(Long id, Member member, Category category, String title, String thumbnail, Long hits, LocalDateTime uploadDate) {
+    public Contents(Long id, Member member, Category category, String title, Long hits, LocalDateTime uploadDate) {
         this.id = id;
         this.member = member;
         this.category = category;
         this.title = title;
-        this.thumbnail = thumbnail;
         this.hits = hits;
         this.uploadDate = uploadDate;
     }

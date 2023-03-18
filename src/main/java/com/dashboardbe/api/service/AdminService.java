@@ -24,7 +24,6 @@ public class AdminService {
                 .pwd(adminDTO.getPwd())
                 .name(adminDTO.getName())
                 .phoneNumber(adminDTO.getPhoneNumber())
-                .profile(adminDTO.getProfile())
                 .build();
         // repository의 save 메소드 호출
         adminRepository.save(admin);

@@ -20,6 +20,11 @@ public class MemberAnalysis {
     @JoinColumn(name = "member_id")
     Member member;
 
+    @Enumerated(value = EnumType.STRING)
+    private MedicalDepartment medicalDepartment;
+
+    private String hospital;
+
     private LocalDateTime visitDate;
 
     @Builder

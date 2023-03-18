@@ -19,16 +19,14 @@ public class Admin {
     private String pwd;
     private String name;
     private String phoneNumber;
-    private String profile;
     private LocalDateTime createTime;
 
     @Builder
-    public Admin(String id, String pwd, String name, String phoneNumber, String profile) {
+    public Admin(String id, String pwd, String name, String phoneNumber) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.profile = profile;
         this.createTime = LocalDateTime.now();
     }
 }

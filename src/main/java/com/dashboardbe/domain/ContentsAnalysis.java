@@ -19,6 +19,9 @@ public class ContentsAnalysis {
     @JoinColumn(name = "contents_id")
     private Contents contents;
 
+    @Enumerated(value = EnumType.STRING)
+    private Category category;
+
     private LocalDateTime visitDate;
 
     @Builder
