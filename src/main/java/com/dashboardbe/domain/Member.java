@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Setter
@@ -25,7 +26,7 @@ public class Member {
 
     private String hospital;
     private Boolean isMember;
-    private LocalDateTime createTime;
+    private String createTime;
     private LocalDateTime deleteTime;
 
     @Builder
@@ -37,7 +38,7 @@ public class Member {
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
         this.isMember = true;
-        this.createTime = LocalDateTime.now();
+        this.createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
         this.deleteTime = null;
     }
 }

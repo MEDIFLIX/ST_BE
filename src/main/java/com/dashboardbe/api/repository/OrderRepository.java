@@ -1,10 +1,7 @@
 package com.dashboardbe.api.repository;
 
 import com.dashboardbe.api.dto.YestWeekReqDTO;
-import com.dashboardbe.domain.Category;
-import com.dashboardbe.domain.MemberAnalysis;
-import com.dashboardbe.domain.QContentsAnalysis;
-import com.dashboardbe.domain.QMemberAnalysis;
+import com.dashboardbe.domain.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -32,9 +29,9 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         return (List<MemberAnalysis>) jpaQueryFactory
                 .select(
-                        m.hospital.count(),
-                        m.medicalDepartment.count()
+                        m.hospital.count()
                 )
+                .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
                 .fetchAll();
@@ -47,9 +44,9 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         return (List<MemberAnalysis>) jpaQueryFactory
                 .select(
-                        m.hospital.count(),
                         m.medicalDepartment.count()
                 )
+                .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
                 .fetchAll();
@@ -64,8 +61,27 @@ public class OrderRepository extends QuerydslRepositorySupport {
                 .select(
                         m.category.count()
                 )
+                .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
+                .fetchAll();
+
+    }
+
+    public List<Member> findWeeklyVisitsInMember(YestWeekReqDTO yestWeekReqDTO) {
+
+        QContentsAnalysis c = QContentsAnalysis.contentsAnalysis;
+        QMember m = QMember.member;
+
+        return (List<Category>) jpaQueryFactory
+                .select(
+                        m.name.count(),
+                        c.contents.count()
+                )
+                .from(m)
+                .leftJoin(c)
+                .on(m.id.eq(c.id.stringValue()))
+                .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .fetchAll();
 
     }

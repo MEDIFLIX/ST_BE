@@ -4,6 +4,7 @@ import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.ContentsOrderDTO;
 import com.dashboardbe.api.dto.MemberOrderDepartmentDTO;
 import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
+import com.dashboardbe.api.dto.WeeklyVisitsDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OrderService;
 import com.dashboardbe.common.SessionUtil;
@@ -143,7 +144,40 @@ public class OrderController {
     }
 
     /**
-     * login 시 컨텐츠 save api
+     * 주간 방문자 분석 api
      */
+    @Operation(summary = "주간 방문자 분석 조회 API", description = "주간 방문자 분석 정보를 조회 후 제공한다.")
+    @GetMapping(value = "selectWeeklyVisits")
+    @LoginCheck
+    public ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>> selectWeeklyVisits(
+            HttpSession session
+    ) {
+        String loginId = SessionUtil.getLoginId(session);
+        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+        // 올바른 관리자라면
+        if (optionalAdmin.isPresent()) {
+
+            List<WeeklyVisitsDTO> weeklyVisitsDTOList = orderService.selectWeeklyVisits();
+
+            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
+                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
+                            HttpStatus.OK.value(),
+                            "성공",
+                            weeklyVisitsDTOList
+                    ),
+                    HttpStatus.OK
+            );
+
+        } else {
+            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
+                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
+                            HttpStatus.NOT_FOUND.value(),
+                            "존재하지 않는 Admin ID입니다.",
+                            null
+                    ),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+    }
 
 }
