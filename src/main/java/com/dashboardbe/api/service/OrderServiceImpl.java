@@ -4,9 +4,6 @@ import com.dashboardbe.api.dto.ContentsOrderDTO;
 import com.dashboardbe.api.dto.MemberOrderDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.api.repository.OrderRepository;
-import com.dashboardbe.common.exception.BaseException;
-import com.dashboardbe.common.exception.ResultType;
-import com.dashboardbe.domain.Member;
 import com.dashboardbe.domain.MemberAnalysis;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,8 +27,8 @@ public class OrderServiceImpl implements OrderService {
         // 한주간 날짜 dto 에 담기
         String localDateTime = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         String yestLocalDateTime = LocalDateTime.now().minusDays(8).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestDay = localDateTime.substring(0,9);
-        String yestWeek = yestLocalDateTime.substring(0,9);
+        String yestDay = localDateTime.substring(0, 9);
+        String yestWeek = yestLocalDateTime.substring(0, 9);
 
         YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
         yestWeekReqDTO.setYestDay(yestDay);

@@ -1,14 +1,12 @@
 package com.dashboardbe.api.controller;
 
 import com.dashboardbe.aop.LoginCheck;
-import com.dashboardbe.api.dto.BoardResponseDTO;
 import com.dashboardbe.api.dto.MemberOrderDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OrderService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
-import com.dashboardbe.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +31,7 @@ public class OrderController {
      */
     @GetMapping(value = "selectWeekly")
     @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>> selectWeeklyOrder (
+    public ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>> selectWeeklyOrder(
             HttpSession session
     ) {
         String loginId = SessionUtil.getLoginId(session);

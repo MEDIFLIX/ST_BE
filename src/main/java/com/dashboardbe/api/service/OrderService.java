@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface OrderService {
 
-    List<MemberOrderDTO> selectMember ();
+    List<MemberOrderDTO> selectMember();
 
-    List<ContentsOrderDTO> selectContent (String id);
+    List<ContentsOrderDTO> selectContent(String id);
 
 }
