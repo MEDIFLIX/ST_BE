@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -25,13 +26,13 @@ public class MemberAnalysis {
 
     private String hospital;
 
-    private LocalDateTime visitDate;
+    private String visitDate;
 
     @Builder
     public MemberAnalysis(Member member, MedicalDepartment medicalDepartment, String hospital) {
         this.member = member;
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
-        this.visitDate = LocalDateTime.now();
+        this.visitDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
     }
 }

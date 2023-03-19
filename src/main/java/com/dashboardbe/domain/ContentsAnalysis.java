@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -22,12 +23,12 @@ public class ContentsAnalysis {
     @Enumerated(value = EnumType.STRING)
     private Category category;
 
-    private LocalDateTime visitDate;
+    private String visitDate;
 
     @Builder
     public ContentsAnalysis(Contents contents, Category category) {
         this.contents = contents;
         this.category = category;
-        this.visitDate = LocalDateTime.now();
+        this.visitDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
     }
 }
