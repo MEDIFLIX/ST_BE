@@ -36,7 +36,7 @@ bootJar {
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-batch' // batch
-
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.15' // swagger
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'

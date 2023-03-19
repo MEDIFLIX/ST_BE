@@ -4,6 +4,8 @@ import com.dashboardbe.api.dto.LoginDTO;
 import com.dashboardbe.api.service.MemberService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Member Controller", description = "회원 컨트롤러")
 public class MemberController {
 
     private final MemberService memberService;
@@ -23,6 +26,7 @@ public class MemberController {
     /**
      * 회원 로그인 + 방문자 기록 저장 컨트롤러
      */
+    @Operation(summary = "[테스트용] 회원 로그인 API", description = "회원 로그인 처리 후 방문자 기록을 저장한다.")
     @PostMapping("/member/login")
     public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
         String loginId = memberService.login(loginDTO);

@@ -10,6 +10,8 @@ import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
 import com.dashboardbe.domain.Todolist;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,17 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Todolist Controller", description = "오늘의 할 일 컨트롤러")
 public class TodolistController {
 
     private final TodolistService todolistService;
     private final AdminRepository adminRepository;
     private final TodolistRepository todolistRepository;
 
+    /**
+     * 오늘의 할 일 추가 컨트롤러
+     */
+    @Operation(summary = "[테스트용] 오늘의 할 일 추가 API", description = "오늘의 할 일 추가")
     @PostMapping("/memo")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> addMemo(@RequestBody TodoRequestDTO dto, HttpSession session) {
@@ -56,6 +63,10 @@ public class TodolistController {
         }
     }
 
+    /**
+     * 오늘의 할 일 삭제 컨트롤러
+     */
+    @Operation(summary = "[테스트용] 오늘의 할 일 삭제 API", description = "오늘의 할 일 삭제")
     @GetMapping("/memo/delete")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> deleteMemo(@RequestParam Long todolistId, HttpSession session) {
@@ -98,6 +109,10 @@ public class TodolistController {
         }
     }
 
+    /**
+     * 오늘의 할 일 목록 컨트롤러
+     */
+    @Operation(summary = "[테스트용] 오늘의 할 일 목록 API", description = "오늘의 할 일 목록")
     @GetMapping("/memo/list")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<TodoResponseDTO>>> list(HttpSession session) {

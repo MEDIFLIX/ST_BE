@@ -8,6 +8,8 @@ import com.dashboardbe.api.service.BoardService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +24,16 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Board Controller", description = "게시판 컨트롤러")
 public class BoardController {
 
     private final BoardService boardService;
     private final AdminRepository adminRepository;
 
     /**
-     * 게시물 등록 컨트롤러
+     * 게시물 작성 컨트롤러
      */
+    @Operation(summary = "[테스트용] 게시물 작성 API", description = "게시물 작성")
     @PostMapping("/board")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> addMemo(@RequestBody BoardRequestDTO dto, HttpSession session) {
@@ -62,6 +66,7 @@ public class BoardController {
     /**
      * 게시물 리스트 컨트롤러
      */
+    @Operation(summary = "[게시판] 게시물 리스트 API", description = "게시물 리스트")
     @GetMapping("/board/list")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>> list(HttpSession session) {

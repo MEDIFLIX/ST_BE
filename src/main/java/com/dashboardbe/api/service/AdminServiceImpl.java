@@ -4,13 +4,9 @@ import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.AdminDTO;
 import com.dashboardbe.api.dto.AdminResponseDTO;
 import com.dashboardbe.api.dto.LoginDTO;
-import com.dashboardbe.api.dto.PageResponseDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.domain.Admin;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -70,10 +66,9 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     @LoginCheck
-    public PageResponseDTO list(Pageable pageable) {
-        Page<Admin> adminList = adminRepository.findAll(pageable);
-        List<AdminResponseDTO> adminResponseDTOList = new ArrayList<>();
-
+    public List<AdminResponseDTO> list() {
+        List<AdminResponseDTO> list = new ArrayList<>();
+        List<Admin> adminList = adminRepository.findAll();
         for (Admin admin : adminList) {
             AdminResponseDTO adminResponseDTO = AdminResponseDTO.builder()
                     .adminId(admin.getId())
@@ -81,15 +76,8 @@ public class AdminServiceImpl implements AdminService{
                     .phoneNumber(admin.getPhoneNumber())
                     .role(admin.getRole())
                     .build();
-            adminResponseDTOList.add(adminResponseDTO);
+            list.add(adminResponseDTO);
         }
-
-        Page<AdminResponseDTO> page = new PageImpl<>(adminResponseDTOList, pageable, adminList.getTotalElements());
-
-        PageResponseDTO pageResponseDTO = PageResponseDTO.builder()
-                .page(page)
-                .build();
-
-        return pageResponseDTO;
+        return list;
     }
 }

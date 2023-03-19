@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
 
     /**
-     * 게시물 등록 서비스 로직
+     * 게시물 작성 서비스 로직
      */
     @Override
     public void save(String content, Admin admin) {

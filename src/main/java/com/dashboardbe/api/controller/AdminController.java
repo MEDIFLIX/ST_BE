@@ -1,26 +1,28 @@
 package com.dashboardbe.api.controller;
 
 import com.dashboardbe.api.dto.AdminDTO;
+import com.dashboardbe.api.dto.AdminResponseDTO;
 import com.dashboardbe.api.dto.LoginDTO;
-import com.dashboardbe.api.dto.PageResponseDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.AdminService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Admin Controller", description = "관리자 컨트롤러")
 public class AdminController {
 
     private final AdminService adminService;
@@ -28,6 +30,7 @@ public class AdminController {
     /***
      * 회원가입 컨트롤러
      */
+    @Operation(summary = "[테스트용] 회원가입 API", description = "관리자 회원가입")
     @PostMapping("/admin/save")
     public String save(@RequestBody AdminDTO adminDTO) {
         adminService.save(adminDTO);
@@ -37,6 +40,7 @@ public class AdminController {
     /**
      * 관리자 로그인 컨트롤러
      */
+    @Operation(summary = "[관리자] 로그인 API", description = "관리자 로그인 처리하고 세션 생성")
     @PostMapping("/admin/login")
     public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
         String loginId = adminService.login(loginDTO);
@@ -83,6 +87,7 @@ public class AdminController {
     /**
      * 로그아웃 컨트롤러
      */
+    @Operation(summary = "[관리자] 로그아웃 API", description = "관리자 로그아웃 처리하고 세션 소멸")
     @PostMapping("/admin/logout")
     public String logout(HttpServletRequest request) {
         // false 옵션 -> 세션이 없는 경우 새로 생성하지 않도록
@@ -98,24 +103,25 @@ public class AdminController {
     /**
      * 관리자 목록 컨트롤러
      */
+    @Operation(summary = "[관리자] 관리자 목록 API", description = "사이드바 상단에 보여주는 관리자 목록")
     @GetMapping("/admin/list")
-    public ResponseEntity<BaseResponseBody<PageResponseDTO>> list(@PageableDefault(page = 0, size = 4, sort = "id") Pageable pageable, HttpSession session) {
+    public ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>> list(HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
         Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
         // 올바른 관리자인 경우
         if (optionalAdmin.isPresent()) {
-            PageResponseDTO pageResponseDTO = adminService.list(pageable);
-            return new ResponseEntity<BaseResponseBody<PageResponseDTO>>(
-                    new BaseResponseBody<PageResponseDTO>(
+            List<AdminResponseDTO> list = adminService.list();
+            return new ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>>(
+                    new BaseResponseBody<List<AdminResponseDTO>>(
                             HttpStatus.OK.value(),
                             "성공",
-                            pageResponseDTO
+                            list
                     ),
                     HttpStatus.OK
             );
         } else {
-            return new ResponseEntity<BaseResponseBody<PageResponseDTO>>(
-                    new BaseResponseBody<PageResponseDTO>(
+            return new ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>>(
+                    new BaseResponseBody<List<AdminResponseDTO>>(
                             HttpStatus.NOT_FOUND.value(),
                             "존재하지 않는 Admin ID입니다.",
                             null
