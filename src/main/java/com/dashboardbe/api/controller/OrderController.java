@@ -2,12 +2,15 @@ package com.dashboardbe.api.controller;
 
 import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.ContentsOrderDTO;
-import com.dashboardbe.api.dto.MemberOrderDTO;
+import com.dashboardbe.api.dto.MemberOrderDepartmentDTO;
+import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OrderService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,17 +25,19 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/order")
+@Tag(name = "Order Controller", description = "주간 순위 조회 컨트롤러")
 public class OrderController {
 
     private final OrderService orderService;
     private final AdminRepository adminRepository;
 
     /**
-     * 주간 순위 변동 get api
+     * 주간 진료 병원 순위 get api
      */
-    @GetMapping(value = "selectWeeklyOrder")
+    @Operation(summary = "[테스트용] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
+    @GetMapping(value = "selectWeeklyHospital")
     @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>> selectWeeklyOrder(
+    public ResponseEntity<BaseResponseBody<List<MemberOrderHospitalDTO>>> selectWeeklyHospital(
             HttpSession session
     ) {
         String loginId = SessionUtil.getLoginId(session);
@@ -40,20 +45,20 @@ public class OrderController {
         // 올바른 관리자라면
         if (optionalAdmin.isPresent()) {
 
-            List<MemberOrderDTO> memberOrderDTOList = orderService.selectMember();
+            List<MemberOrderHospitalDTO> memberOrderHospitalDTOList = orderService.selectMemberHospital();
 
-            return new ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>>(
-                    new BaseResponseBody<List<MemberOrderDTO>>(
+            return new ResponseEntity<BaseResponseBody<List<MemberOrderHospitalDTO>>>(
+                    new BaseResponseBody<List<MemberOrderHospitalDTO>>(
                             HttpStatus.OK.value(),
                             "성공",
-                            memberOrderDTOList
+                            memberOrderHospitalDTOList
                     ),
                     HttpStatus.OK
             );
 
         } else {
-            return new ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>>(
-                    new BaseResponseBody<List<MemberOrderDTO>>(
+            return new ResponseEntity<BaseResponseBody<List<MemberOrderHospitalDTO>>>(
+                    new BaseResponseBody<List<MemberOrderHospitalDTO>>(
                             HttpStatus.NOT_FOUND.value(),
                             "존재하지 않는 Admin ID입니다.",
                             null
@@ -63,10 +68,47 @@ public class OrderController {
         }
     }
 
+    /**
+     * 주간 진료 과목 순위 조회 Get api
+     */
+    @Operation(summary = "[테스트용] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
+    @GetMapping(value = "selectWeeklyDepartment")
+    @LoginCheck
+    public ResponseEntity<BaseResponseBody<List<MemberOrderDepartmentDTO>>> selectWeeklyDepartment(
+            HttpSession session
+    ) {
+        String loginId = SessionUtil.getLoginId(session);
+        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+        // 올바른 관리자라면
+        if (optionalAdmin.isPresent()) {
+
+            List<MemberOrderDepartmentDTO> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
+
+            return new ResponseEntity<BaseResponseBody<List<MemberOrderDepartmentDTO>>>(
+                    new BaseResponseBody<List<MemberOrderDepartmentDTO>>(
+                            HttpStatus.OK.value(),
+                            "성공",
+                            memberOrderDepartmentDTOList
+                    ),
+                    HttpStatus.OK
+            );
+
+        } else {
+            return new ResponseEntity<BaseResponseBody<List<MemberOrderDepartmentDTO>>>(
+                    new BaseResponseBody<List<MemberOrderDepartmentDTO>>(
+                            HttpStatus.NOT_FOUND.value(),
+                            "존재하지 않는 Admin ID입니다.",
+                            null
+                    ),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+    }
 
     /**
      * 주간 컨텐츠 순위 변동 get api
      */
+    @Operation(summary = "컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>> selectWeeklyContents(
@@ -99,5 +141,9 @@ public class OrderController {
             );
         }
     }
+
+    /**
+     * login 시 컨텐츠 save api
+     */
 
 }

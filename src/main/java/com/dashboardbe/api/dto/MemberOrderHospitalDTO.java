@@ -3,10 +3,8 @@ package com.dashboardbe.api.dto;
 import lombok.Data;
 
 @Data
-public class MemberOrderDTO {
+public class MemberOrderHospitalDTO {
 
-    private String medicalDepartment;
     private String hospital;
-    
 
 }
