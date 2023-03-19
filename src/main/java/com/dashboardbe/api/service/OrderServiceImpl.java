@@ -5,7 +5,6 @@ import com.dashboardbe.api.dto.MemberOrderDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.api.repository.OrderRepository;
 import com.dashboardbe.domain.Category;
-import com.dashboardbe.domain.ContentsAnalysis;
 import com.dashboardbe.domain.MemberAnalysis;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

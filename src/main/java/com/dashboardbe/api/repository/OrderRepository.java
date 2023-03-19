@@ -1,8 +1,10 @@
 package com.dashboardbe.api.repository;
 
-import com.dashboardbe.api.dto.ContentsOrderDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
-import com.dashboardbe.domain.*;
+import com.dashboardbe.domain.Category;
+import com.dashboardbe.domain.MemberAnalysis;
+import com.dashboardbe.domain.QContentsAnalysis;
+import com.dashboardbe.domain.QMemberAnalysis;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
