@@ -9,6 +9,6 @@ public interface OrderService {
 
     List<MemberOrderDTO> selectMember();
 
-    List<ContentsOrderDTO> selectContent(String id);
+    List<ContentsOrderDTO> selectContent();
 
 }
