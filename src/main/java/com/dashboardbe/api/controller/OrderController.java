@@ -1,6 +1,7 @@
 package com.dashboardbe.api.controller;
 
 import com.dashboardbe.aop.LoginCheck;
+import com.dashboardbe.api.dto.ContentsOrderDTO;
 import com.dashboardbe.api.dto.MemberOrderDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OrderService;
@@ -29,7 +30,7 @@ public class OrderController {
     /**
      * 주간 순위 변동 get api
      */
-    @GetMapping(value = "selectWeekly")
+    @GetMapping(value = "selectWeeklyOrder")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>> selectWeeklyOrder(
             HttpSession session
@@ -53,6 +54,43 @@ public class OrderController {
         } else {
             return new ResponseEntity<BaseResponseBody<List<MemberOrderDTO>>>(
                     new BaseResponseBody<List<MemberOrderDTO>>(
+                            HttpStatus.NOT_FOUND.value(),
+                            "존재하지 않는 Admin ID입니다.",
+                            null
+                    ),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+    }
+
+
+    /**
+     * 주간 컨텐츠 순위 변동 get api
+     */
+    @GetMapping(value = "selectWeeklyContents")
+    @LoginCheck
+    public ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>> selectWeeklyContents(
+            HttpSession session
+    ) {
+        String loginId = SessionUtil.getLoginId(session);
+        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+        // 올바른 관리자라면
+        if (optionalAdmin.isPresent()) {
+
+            List<ContentsOrderDTO> contentsOrderDTOList = orderService.selectContent();
+
+            return new ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>>(
+                    new BaseResponseBody<List<ContentsOrderDTO>>(
+                            HttpStatus.OK.value(),
+                            "성공",
+                            contentsOrderDTOList
+                    ),
+                    HttpStatus.OK
+            );
+
+        } else {
+            return new ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>>(
+                    new BaseResponseBody<List<ContentsOrderDTO>>(
                             HttpStatus.NOT_FOUND.value(),
                             "존재하지 않는 Admin ID입니다.",
                             null
