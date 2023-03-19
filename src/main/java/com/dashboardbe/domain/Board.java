@@ -23,13 +23,12 @@ public class Board {
     private Admin admin;
 
     private String content;
-    private LocalDateTime localDateTime;
+    private LocalDateTime createDate;
 
     @Builder
-    public Board(Long id, Admin admin, String content, LocalDateTime localDateTime) {
-        this.id = id;
+    public Board(Admin admin, String content) {
         this.admin = admin;
         this.content = content;
-        this.localDateTime = localDateTime;
+        this.createDate = LocalDateTime.now();
     }
 }

@@ -28,9 +28,10 @@ public class MemberAnalysis {
     private LocalDateTime visitDate;
 
     @Builder
-    public MemberAnalysis(Long id, Member member, LocalDateTime visitDate) {
-        this.id = id;
+    public MemberAnalysis(Member member, MedicalDepartment medicalDepartment, String hospital) {
         this.member = member;
-        this.visitDate = visitDate;
+        this.medicalDepartment = medicalDepartment;
+        this.hospital = hospital;
+        this.visitDate = LocalDateTime.now();
     }
 }

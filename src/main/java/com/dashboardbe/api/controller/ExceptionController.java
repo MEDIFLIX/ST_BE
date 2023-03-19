@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionController {
+
+    /**
+     * SessionCheckAOP 예외 처리
+     */
     @ExceptionHandler(SessionBadRequestException.class)
     public ResponseEntity<ExceptionResponse> sessionBadRequest(final SessionBadRequestException exception) {
         return new ResponseEntity<>(

@@ -19,9 +19,14 @@ public class ContentsController {
 
     private final ContentsService contentsService;
     private final ContentsRepository contentsRepository;
+
+    /**
+     * 조회수 증가 + 콘텐츠 조회 기록 저장 컨트롤러
+     */
     @GetMapping("/contents")
     public ResponseEntity<BaseResponseBody<Long>> addHits(@RequestParam Long contentsId) {
         Optional<Contents> optionalContents = contentsRepository.findById(contentsId);
+        // 존재하는 콘텐츠라면
         if (optionalContents.isPresent()) {
             Contents contents = optionalContents.get();
             contentsService.add(contents);

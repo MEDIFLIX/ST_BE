@@ -25,9 +25,9 @@ public class ContentsAnalysis {
     private LocalDateTime visitDate;
 
     @Builder
-    public ContentsAnalysis(Long id, Contents contents, LocalDateTime visitDate) {
-        this.id = id;
+    public ContentsAnalysis(Contents contents, Category category) {
         this.contents = contents;
-        this.visitDate = visitDate;
+        this.category = category;
+        this.visitDate = LocalDateTime.now();
     }
 }

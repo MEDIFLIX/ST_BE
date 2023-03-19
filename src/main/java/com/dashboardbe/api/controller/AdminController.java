@@ -1,47 +1,53 @@
 package com.dashboardbe.api.controller;
 
 import com.dashboardbe.api.dto.AdminDTO;
+import com.dashboardbe.api.dto.LoginDTO;
+import com.dashboardbe.api.dto.PageResponseDTO;
+import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.AdminService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
+import com.dashboardbe.domain.Admin;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final AdminService memberService;
-
+    private final AdminService adminService;
+    private final AdminRepository adminRepository;
     /***
-     * 회원가입
+     * 회원가입 컨트롤러
      */
     @PostMapping("/admin/save")
     public String save(@RequestBody AdminDTO adminDTO) {
-        memberService.save(adminDTO);
+        adminService.save(adminDTO);
         return "성공!";
     }
 
     /**
-     * 로그인
-     * @return null이면 로그인 실패
+     * 관리자 로그인 컨트롤러
      */
     @PostMapping("/admin/login")
-    public ResponseEntity<BaseResponseBody<String>> login(@RequestBody AdminDTO adminDTO, HttpServletRequest request) {
-        String loginId = memberService.login(adminDTO);
+    public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+        String loginId = adminService.login(loginDTO);
         // 회원이 아닌 경우
         if (loginId.equals("NO_DATA")) {
             return new ResponseEntity<BaseResponseBody<String>>(
                     new BaseResponseBody<String>(
-                    HttpStatus.NOT_FOUND.value(),
-                    "회원 정보가 존재하지 않습니다.",
+                            HttpStatus.NOT_FOUND.value(),
+                            "회원 정보가 존재하지 않습니다.",
                             "NO_DATA"
-            ),
+                    ),
                     HttpStatus.NOT_FOUND
             );
         }
@@ -75,7 +81,7 @@ public class AdminController {
     }
 
     /**
-     * 로그아웃
+     * 로그아웃 컨트롤러
      */
     @PostMapping("/admin/logout")
     public String logout(HttpServletRequest request) {
@@ -87,5 +93,35 @@ public class AdminController {
         }
         // 로그인 화면으로 리다이렉트 시킴
         return "/admin/login";
+    }
+
+    /**
+     * 관리자 목록 컨트롤러
+     */
+    @GetMapping("/admin/list")
+    public ResponseEntity<BaseResponseBody<PageResponseDTO>> list(@PageableDefault(page = 0, size = 4, sort = "id") Pageable pageable, HttpSession session) {
+        String loginId = SessionUtil.getLoginId(session);
+        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+        // 올바른 관리자인 경우
+        if (optionalAdmin.isPresent()) {
+            PageResponseDTO pageResponseDTO = adminService.list(pageable);
+            return new ResponseEntity<BaseResponseBody<PageResponseDTO>>(
+                    new BaseResponseBody<PageResponseDTO>(
+                            HttpStatus.OK.value(),
+                            "성공",
+                            pageResponseDTO
+                    ),
+                    HttpStatus.OK
+            );
+        } else {
+            return new ResponseEntity<BaseResponseBody<PageResponseDTO>>(
+                    new BaseResponseBody<PageResponseDTO>(
+                            HttpStatus.NOT_FOUND.value(),
+                            "존재하지 않는 Admin ID입니다.",
+                            null
+                    ),
+                    HttpStatus.NOT_FOUND
+            );
+        }
     }
 }
