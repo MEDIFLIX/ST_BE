@@ -23,12 +23,12 @@ public class ContentsAnalysis {
     @Enumerated(value = EnumType.STRING)
     private Category category;
 
-    private String visitDate;
+    private LocalDateTime visitDate;
 
     @Builder
     public ContentsAnalysis(Contents contents, Category category) {
         this.contents = contents;
         this.category = category;
-        this.visitDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
+        this.visitDate = LocalDateTime.now();
     }
 }

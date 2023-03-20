@@ -26,7 +26,7 @@ public class Member {
 
     private String hospital;
     private Boolean isMember;
-    private String createTime;
+    private LocalDateTime createTime;
     private LocalDateTime deleteTime;
 
     @Builder
@@ -38,7 +38,7 @@ public class Member {
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
         this.isMember = true;
-        this.createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
+        this.createTime = LocalDateTime.now();
         this.deleteTime = null;
     }
 }

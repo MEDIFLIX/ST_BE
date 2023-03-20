@@ -26,14 +26,12 @@ public class OrderServiceImpl implements OrderService {
     public List<MemberOrderHospitalDTO> selectMemberHospital() {
 
         // 한주간 날짜 dto 에 담기
-        String localDateTime = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestLocalDateTime = LocalDateTime.now().minusDays(8).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestDay = localDateTime.substring(0, 9);
-        String yestWeek = yestLocalDateTime.substring(0, 9);
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime yestLocalDateTime = LocalDateTime.now().minusDays(8);
 
         YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
-        yestWeekReqDTO.setYestDay(yestDay);
-        yestWeekReqDTO.setYestWeek(yestWeek);
+        yestWeekReqDTO.setYestDay(localDateTime);
+        yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
         List<MemberAnalysis> memberAnalysis = orderRepository.selectHospitalInMemberAnalysis(yestWeekReqDTO);
 
@@ -53,14 +51,12 @@ public class OrderServiceImpl implements OrderService {
     public List<MemberOrderDepartmentDTO> selectMemberDepartment() {
 
         // 한주간 날짜 dto 에 담기
-        String localDateTime = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestLocalDateTime = LocalDateTime.now().minusDays(8).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestDay = localDateTime.substring(0, 9);
-        String yestWeek = yestLocalDateTime.substring(0, 9);
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime yestLocalDateTime = LocalDateTime.now().minusDays(8);
 
         YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
-        yestWeekReqDTO.setYestDay(yestDay);
-        yestWeekReqDTO.setYestWeek(yestWeek);
+        yestWeekReqDTO.setYestDay(localDateTime);
+        yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
         List<MemberAnalysis> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
 
@@ -80,14 +76,12 @@ public class OrderServiceImpl implements OrderService {
     public List<ContentsOrderDTO> selectContent() {
 
         // 한주간 날짜 dto 에 담기
-        String localDateTime = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestLocalDateTime = LocalDateTime.now().minusDays(8).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestDay = localDateTime.substring(0, 9);
-        String yestWeek = yestLocalDateTime.substring(0, 9);
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime yestLocalDateTime = LocalDateTime.now().minusDays(8);
 
         YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
-        yestWeekReqDTO.setYestDay(yestDay);
-        yestWeekReqDTO.setYestWeek(yestWeek);
+        yestWeekReqDTO.setYestDay(localDateTime);
+        yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
         List<Category> contentsAnalysis = orderRepository.findByIdInContentsAnalysis(yestWeekReqDTO);
 
@@ -107,14 +101,12 @@ public class OrderServiceImpl implements OrderService {
     public List<WeeklyVisitsDTO> selectWeeklyVisits() {
 
         // 한주간 날짜 dto 에 담기
-        String localDateTime = LocalDateTime.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestLocalDateTime = LocalDateTime.now().minusDays(8).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String yestDay = localDateTime.substring(0, 9);
-        String yestWeek = yestLocalDateTime.substring(0, 9);
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime yestLocalDateTime = LocalDateTime.now().minusDays(8);
 
         YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
-        yestWeekReqDTO.setYestDay(yestDay);
-        yestWeekReqDTO.setYestWeek(yestWeek);
+        yestWeekReqDTO.setYestDay(localDateTime);
+        yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
         List<Member> contentsAnalysis = orderRepository.findWeeklyVisitsInMember(yestWeekReqDTO);
 

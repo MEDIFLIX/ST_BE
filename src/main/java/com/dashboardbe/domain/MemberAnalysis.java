@@ -26,13 +26,13 @@ public class MemberAnalysis {
 
     private String hospital;
 
-    private String visitDate;
+    private LocalDateTime visitDate;
 
     @Builder
     public MemberAnalysis(Member member, MedicalDepartment medicalDepartment, String hospital) {
         this.member = member;
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
-        this.visitDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyymmdd"));
+        this.visitDate = LocalDateTime.now();
     }
 }

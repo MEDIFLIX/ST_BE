@@ -73,7 +73,7 @@ public class OrderRepository extends QuerydslRepositorySupport {
         QContentsAnalysis c = QContentsAnalysis.contentsAnalysis;
         QMember m = QMember.member;
 
-        return (List<Category>) jpaQueryFactory
+        return (List<Member>) jpaQueryFactory
                 .select(
                         m.name.count(),
                         c.contents.count()

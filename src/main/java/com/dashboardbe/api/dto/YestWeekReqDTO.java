@@ -2,10 +2,12 @@ package com.dashboardbe.api.dto;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class YestWeekReqDTO {
 
-    private String yestDay;
-    private String yestWeek;
+    private LocalDateTime yestDay;
+    private LocalDateTime yestWeek;
 
 }
