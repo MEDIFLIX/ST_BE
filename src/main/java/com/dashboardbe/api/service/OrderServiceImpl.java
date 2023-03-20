@@ -32,9 +32,9 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<MemberAnalysis> memberAnalysis = orderRepository.selectHospitalInMemberAnalysis(yestWeekReqDTO);
+        List<MemberOrderHospitalDTO> memberAnalysis = orderRepository.selectHospitalInMemberAnalysis(yestWeekReqDTO);
 
-        List<MemberAnalysis> hospitalSorted = memberAnalysis.stream()
+        List<MemberOrderHospitalDTO> hospitalSorted = memberAnalysis.stream()
                                                         .sorted()
                                                         .collect(Collectors.toList());
 
@@ -57,9 +57,9 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<MemberAnalysis> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
+        List<MemberOrderDepartmentDTO> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
 
-        List<MemberAnalysis> hospitalSorted = memberAnalysis.stream()
+        List<MemberOrderDepartmentDTO> hospitalSorted = memberAnalysis.stream()
                                                         .sorted()
                                                         .collect(Collectors.toList());
 

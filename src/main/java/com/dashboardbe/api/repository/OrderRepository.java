@@ -1,6 +1,8 @@
 package com.dashboardbe.api.repository;
 
 import com.dashboardbe.api.dto.ContentsChangesDTO;
+import com.dashboardbe.api.dto.MemberOrderDepartmentDTO;
+import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.domain.*;
 import com.querydsl.jpa.JPAExpressions;
@@ -25,11 +27,11 @@ public class OrderRepository extends QuerydslRepositorySupport {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    public List<MemberAnalysis> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<MemberOrderHospitalDTO> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<MemberAnalysis>) jpaQueryFactory
+        return (List<MemberOrderHospitalDTO>) jpaQueryFactory
                 .select(
                         m.hospital.count()
                 )
@@ -40,11 +42,11 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
     }
 
-    public List<MemberAnalysis> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<MemberOrderDepartmentDTO> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<MemberAnalysis>) jpaQueryFactory
+        return (List<MemberOrderDepartmentDTO>) jpaQueryFactory
                 .select(
                         m.medicalDepartment.count()
                 )
