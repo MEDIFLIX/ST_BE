@@ -25,7 +25,7 @@ public class Member {
     private MedicalDepartment medicalDepartment;
 
     private String hospital;
-    private Boolean isMember;
+    private String isMember;
     private LocalDateTime createTime;
     private LocalDateTime deleteTime;
 
@@ -37,7 +37,7 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
-        this.isMember = true;
+        this.isMember = "Y";
         this.createTime = LocalDateTime.now();
         this.deleteTime = null;
     }

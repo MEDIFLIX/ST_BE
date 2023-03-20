@@ -77,13 +77,37 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         return (List<Member>) jpaQueryFactory
                 .select(
-                        m.name.count(),
-                        c.contents.count()
+
+                        JPAExpressions
+                                .select(c.contents.count())
+                                .from(c)
+                                .where(c.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+
+                        JPAExpressions
+                                .select(m.name.count())
+                                .from(m)
+                                .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+
+                        JPAExpressions
+                                .select(m.name.count())
+                                .from(m)
+                                .where(
+                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
+                                        m.isMember.eq("N")
+                                ),
+
+                        JPAExpressions
+                                .select(m.name.count())
+                                .from(m)
+                                .where(
+                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
+
+                                )
+
                 )
                 .from(m)
                 .leftJoin(c)
                 .on(m.id.eq(c.id.stringValue()))
-                .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .fetchAll();
 
     }
