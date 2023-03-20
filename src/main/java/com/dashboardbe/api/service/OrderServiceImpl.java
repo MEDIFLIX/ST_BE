@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -119,6 +118,33 @@ public class OrderServiceImpl implements OrderService {
         modelMapper.map(memberVisitsSort, response);
 
         return response;
+
+    }
+
+    @Override
+    public List<ContentsChangesDTO.Res> selectContentChanges() {
+
+        // 이번 한주간 날짜 dto 에 담기
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
+        LocalDateTime yestLocalDateTime = LocalDateTime.now().minusDays(8);
+
+        // 지난 한주간 날짜 dto 에 담기
+        LocalDateTime pastLocalDateTime = LocalDateTime.now().minusDays(15);
+
+        YestWeekReqDTO yestWeekReqDTO = new YestWeekReqDTO();
+        yestWeekReqDTO.setYestDay(localDateTime);
+        yestWeekReqDTO.setYestWeek(yestLocalDateTime);
+        yestWeekReqDTO.setPastWeek(pastLocalDateTime);
+
+        List<ContentsChangesDTO.Req> Info = orderRepository.findYestContentChanges(yestWeekReqDTO);
+
+        List<ContentsChangesDTO.Res> result = null;
+
+        for (ContentsChangesDTO.Req req : Info) {
+            result.add(req.getThisWeek() - req.getPastWeek());
+        }
+
+        return result;
 
     }
 

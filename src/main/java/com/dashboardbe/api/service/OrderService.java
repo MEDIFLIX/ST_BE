@@ -1,9 +1,6 @@
 package com.dashboardbe.api.service;
 
-import com.dashboardbe.api.dto.ContentsOrderDTO;
-import com.dashboardbe.api.dto.MemberOrderDepartmentDTO;
-import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
-import com.dashboardbe.api.dto.WeeklyVisitsDTO;
+import com.dashboardbe.api.dto.*;
 
 import java.util.List;
 
@@ -16,5 +13,7 @@ public interface OrderService {
     List<ContentsOrderDTO> selectContent();
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
+
+    List<ContentsChangesDTO.Res> selectContentChanges();
 
 }

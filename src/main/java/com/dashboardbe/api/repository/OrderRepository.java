@@ -1,7 +1,9 @@
 package com.dashboardbe.api.repository;
 
+import com.dashboardbe.api.dto.ContentsChangesDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.domain.*;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -82,6 +84,27 @@ public class OrderRepository extends QuerydslRepositorySupport {
                 .leftJoin(c)
                 .on(m.id.eq(c.id.stringValue()))
                 .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
+                .fetchAll();
+
+    }
+
+    public List<ContentsChangesDTO.Req> findYestContentChanges(YestWeekReqDTO yestWeekReqDTO) {
+
+        QContentsAnalysis m = QContentsAnalysis.contentsAnalysis;
+
+        return (List<ContentsChangesDTO.Req>) jpaQueryFactory
+                .select(
+                        JPAExpressions
+                                .select(m.category.count())
+                                .from(m)
+                                .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                        JPAExpressions
+                                .select(m.category.count())
+                                .from(m)
+                                .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek()))
+                )
+                .from(m)
+                .groupBy(m.id)
                 .fetchAll();
 
     }

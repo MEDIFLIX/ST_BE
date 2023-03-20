@@ -9,5 +9,6 @@ public class YestWeekReqDTO {
 
     private LocalDateTime yestDay;
     private LocalDateTime yestWeek;
+    private LocalDateTime pastWeek;
 
 }
