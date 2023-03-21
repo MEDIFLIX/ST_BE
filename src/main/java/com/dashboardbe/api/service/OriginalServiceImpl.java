@@ -16,7 +16,11 @@ public class OriginalServiceImpl implements OriginalService {
 
     @Override
     public List<OriginalWeeklyInfoDTO.Res> selectWeeklyInfo() {
-        return null;
+
+        List<OriginalWeeklyInfoDTO.Res> result = originalRepository.selectWeeklyInfo();
+
+        return result;
+
     }
 
     @Override
