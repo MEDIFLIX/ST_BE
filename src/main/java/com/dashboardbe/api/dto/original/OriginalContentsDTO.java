@@ -11,6 +11,7 @@ public class OriginalContentsDTO {
     @AllArgsConstructor
     public class Req {
         private String countYn;
+        private String searchWord;
     }
 
     @Getter

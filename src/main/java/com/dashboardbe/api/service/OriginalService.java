@@ -11,6 +11,6 @@ public interface OriginalService {
 
     List<OriginalWeeklyInfoDTO.Res> selectWeeklyInfo();
 
-    List<OriginalContentsDTO.Res> selectContentsInfo();
+    List<OriginalContentsDTO.Res> selectContentsInfo(OriginalContentsDTO.Req request);
 
 }

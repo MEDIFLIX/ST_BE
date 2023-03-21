@@ -78,7 +78,7 @@ public class OriginalController {
     @GetMapping(value = "selectContentsInfo")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>> selectContentsInfo(
-            @RequestParam String countYn,
+            @RequestParam OriginalContentsDTO.Req request,
             HttpSession session
     ) {
 
@@ -87,7 +87,7 @@ public class OriginalController {
         // 올바른 관리자라면
         if (optionalAdmin.isPresent()) {
 
-            List<OriginalContentsDTO.Res> ContentsInfo = originalService.selectContentsInfo();
+            List<OriginalContentsDTO.Res> ContentsInfo = originalService.selectContentsInfo(request);
 
             return new ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>>(
                     new BaseResponseBody<List<OriginalContentsDTO.Res>>(
