@@ -102,7 +102,7 @@ public class OrderRepository extends QuerydslRepositorySupport {
                                 .select(m.name.count())
                                 .from(m)
                                 .where(
-                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
+                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())
 
                                 )
 

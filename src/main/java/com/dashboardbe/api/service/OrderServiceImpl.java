@@ -4,7 +4,6 @@ import com.dashboardbe.api.dto.*;
 import com.dashboardbe.api.repository.OrderRepository;
 import com.dashboardbe.domain.Category;
 import com.dashboardbe.domain.Member;
-import com.dashboardbe.domain.MemberAnalysis;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -122,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ContentsChangesDTO.Res> selectContentChanges() {
+    public List<Integer> selectContentChanges() {
 
         // 이번 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -138,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<ContentsChangesDTO.Req> Info = orderRepository.findYestContentChanges(yestWeekReqDTO);
 
-        List<ContentsChangesDTO.Res> result = null;
+        List<Integer> result = null;
 
         for (ContentsChangesDTO.Req req : Info) {
             result.add(req.getThisWeek() - req.getPastWeek());

@@ -14,6 +14,6 @@ public interface OrderService {
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
 
-    List<ContentsChangesDTO.Res> selectContentChanges();
+    List<Integer> selectContentChanges();
 
 }
