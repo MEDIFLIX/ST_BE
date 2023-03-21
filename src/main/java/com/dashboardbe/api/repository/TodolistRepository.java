@@ -11,7 +11,5 @@ import java.util.List;
 
 @Repository
 public interface TodolistRepository extends JpaRepository<Todolist, Long> {
-    //    @Query(value = "select t.id, t.content from Todolist t where t.admin = :#{#admin}")
-//    List findByAdminId(@Param("admin")Admin admin);
     List findByAdminId(String adminId);
 }

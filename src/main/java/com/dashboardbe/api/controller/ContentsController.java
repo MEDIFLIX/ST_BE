@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/contents")
 @Tag(name = "Contents Controller", description = "동영상 콘텐츠 컨트롤러")
 public class ContentsController {
 
@@ -27,7 +29,7 @@ public class ContentsController {
      * 조회수 증가 + 콘텐츠 조회 기록 저장 컨트롤러
      */
     @Operation(summary = "[테스트용] 조회수 증가 API", description = "콘텐츠 클릭 시 조회수 증가시키고 콘텐츠 조회 기록을 저장한다.")
-    @GetMapping("/contents")
+    @GetMapping("")
     public ResponseEntity<BaseResponseBody<Long>> addHits(@RequestParam Long contentsId) {
         Optional<Contents> optionalContents = contentsRepository.findById(contentsId);
         // 존재하는 콘텐츠라면

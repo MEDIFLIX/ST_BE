@@ -65,7 +65,7 @@ public class AdminServiceImpl implements AdminService{
      * 관리자 목록 페이지네이션 로직
      */
     @Override
-    @LoginCheck
+//    @LoginCheck
     public List<AdminResponseDTO> list() {
         List<AdminResponseDTO> list = new ArrayList<>();
         List<Admin> adminList = adminRepository.findAll();

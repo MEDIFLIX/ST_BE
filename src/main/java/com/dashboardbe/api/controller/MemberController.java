@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/member")
 @Tag(name = "Member Controller", description = "회원 컨트롤러")
 public class MemberController {
 
@@ -27,7 +29,7 @@ public class MemberController {
      * 회원 로그인 + 방문자 기록 저장 컨트롤러
      */
     @Operation(summary = "[테스트용] 회원 로그인 API", description = "회원 로그인 처리 후 방문자 기록을 저장한다.")
-    @PostMapping("/member/login")
+    @PostMapping("/login")
     public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
         String loginId = memberService.login(loginDTO);
         // 회원이 아닌 경우

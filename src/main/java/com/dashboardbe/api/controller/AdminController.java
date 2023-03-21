@@ -7,7 +7,6 @@ import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.AdminService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
-import com.dashboardbe.domain.Admin;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/admin")
 @Tag(name = "Admin Controller", description = "관리자 컨트롤러")
 public class AdminController {
 
@@ -31,7 +30,7 @@ public class AdminController {
      * 회원가입 컨트롤러
      */
     @Operation(summary = "[테스트용] 회원가입 API", description = "관리자 회원가입")
-    @PostMapping("/admin/save")
+    @PostMapping("/save")
     public String save(@RequestBody AdminDTO adminDTO) {
         adminService.save(adminDTO);
         return "성공!";
@@ -41,7 +40,7 @@ public class AdminController {
      * 관리자 로그인 컨트롤러
      */
     @Operation(summary = "[관리자] 로그인 API", description = "관리자 로그인 처리하고 세션 생성")
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
         String loginId = adminService.login(loginDTO);
         // 회원이 아닌 경우
@@ -88,7 +87,7 @@ public class AdminController {
      * 로그아웃 컨트롤러
      */
     @Operation(summary = "[관리자] 로그아웃 API", description = "관리자 로그아웃 처리하고 세션 소멸")
-    @PostMapping("/admin/logout")
+    @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         // false 옵션 -> 세션이 없는 경우 새로 생성하지 않도록
         HttpSession session = request.getSession(false);
@@ -104,12 +103,12 @@ public class AdminController {
      * 관리자 목록 컨트롤러
      */
     @Operation(summary = "[관리자] 관리자 목록 API", description = "사이드바 상단에 보여주는 관리자 목록")
-    @GetMapping("/admin/list")
+    @GetMapping("/list")
     public ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>> list(HttpSession session) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+        //String loginId = SessionUtil.getLoginId(session);
+        //Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
         // 올바른 관리자인 경우
-        if (optionalAdmin.isPresent()) {
+        //if (optionalAdmin.isPresent()) {
             List<AdminResponseDTO> list = adminService.list();
             return new ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>>(
                     new BaseResponseBody<List<AdminResponseDTO>>(
@@ -119,15 +118,15 @@ public class AdminController {
                     ),
                     HttpStatus.OK
             );
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>>(
-                    new BaseResponseBody<List<AdminResponseDTO>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<AdminResponseDTO>>>(
+//                    new BaseResponseBody<List<AdminResponseDTO>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 }

@@ -23,6 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/memo")
 @Tag(name = "Todolist Controller", description = "오늘의 할 일 컨트롤러")
 public class TodolistController {
 
@@ -34,7 +35,7 @@ public class TodolistController {
      * 오늘의 할 일 추가 컨트롤러
      */
     @Operation(summary = "[테스트용] 오늘의 할 일 추가 API", description = "오늘의 할 일 추가")
-    @PostMapping("/memo")
+    @PostMapping("")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> addMemo(@RequestBody TodoRequestDTO dto, HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
@@ -67,7 +68,7 @@ public class TodolistController {
      * 오늘의 할 일 삭제 컨트롤러
      */
     @Operation(summary = "[테스트용] 오늘의 할 일 삭제 API", description = "오늘의 할 일 삭제")
-    @GetMapping("/memo/delete")
+    @GetMapping("/delete")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> deleteMemo(@RequestParam Long todolistId, HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
@@ -113,7 +114,7 @@ public class TodolistController {
      * 오늘의 할 일 목록 컨트롤러
      */
     @Operation(summary = "[테스트용] 오늘의 할 일 목록 API", description = "오늘의 할 일 목록")
-    @GetMapping("/memo/list")
+    @GetMapping("/list")
     @LoginCheck
     public ResponseEntity<BaseResponseBody<List<TodoResponseDTO>>> list(HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
