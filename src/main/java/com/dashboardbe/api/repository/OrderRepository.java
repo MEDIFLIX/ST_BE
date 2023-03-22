@@ -1,10 +1,8 @@
 package com.dashboardbe.api.repository;
 
-import com.dashboardbe.api.dto.ContentsChangesDTO;
-import com.dashboardbe.api.dto.MemberOrderDepartmentDTO;
-import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
-import com.dashboardbe.api.dto.YestWeekReqDTO;
+import com.dashboardbe.api.dto.*;
 import com.dashboardbe.domain.*;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -57,60 +56,65 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
     }
 
-    public List<Category> findByIdInContentsAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<Long> findByIdInContentsAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QContentsAnalysis m = QContentsAnalysis.contentsAnalysis;
 
-        return (List<Category>) jpaQueryFactory
+        return (List<Long>) jpaQueryFactory
                 .select(
-                        m.category.count()
+                        m.category.count().as("category")
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
-                .fetchAll();
+                .fetch();
 
     }
 
-    public List<Member> findWeeklyVisitsInMember(YestWeekReqDTO yestWeekReqDTO) {
+    public List<WeeklyVisitsDTO> findWeeklyVisitsInMember(YestWeekReqDTO yestWeekReqDTO) {
 
         QContentsAnalysis c = QContentsAnalysis.contentsAnalysis;
         QMember m = QMember.member;
 
-        return (List<Member>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
 
-                        JPAExpressions
-                                .select(c.contents.count())
-                                .from(c)
-                                .where(c.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                        Projections.fields(
 
-                        JPAExpressions
-                                .select(m.name.count())
-                                .from(m)
-                                .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                                WeeklyVisitsDTO.class,
 
-                        JPAExpressions
-                                .select(m.name.count())
-                                .from(m)
-                                .where(
-                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
-                                        m.isMember.eq("N")
-                                ),
+                            JPAExpressions
+                                    .select(c.contents.count().as("ContentsHits"))
+                                    .from(c)
+                                    .where(c.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
 
-                        JPAExpressions
-                                .select(m.name.count())
-                                .from(m)
-                                .where(
-                                        m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())
+                            JPAExpressions
+                                    .select(m.name.count().as("all"))
+                                    .from(m)
+                                    .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
 
-                                )
+                            JPAExpressions
+                                    .select(m.name.count().as("quit"))
+                                    .from(m)
+                                    .where(
+                                            m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
+                                            m.isMember.eq("N")
+                                    ),
+
+                            JPAExpressions
+                                    .select(m.name.count().as("newbie"))
+                                    .from(m)
+                                    .where(
+                                            m.createTime.between(LocalDateTime.now().minusDays(2), LocalDateTime.now().minusDays(1))
+                                    )
+
+                        )
 
                 )
                 .from(m)
                 .leftJoin(c)
                 .on(m.id.eq(c.id.stringValue()))
-                .fetchAll();
+                .fetch();
 
     }
 

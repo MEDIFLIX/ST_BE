@@ -71,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<ContentsOrderDTO> selectContent() {
+    public List<Long> selectContent() {
 
         // 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -81,17 +81,17 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<Category> contentsAnalysis = orderRepository.findByIdInContentsAnalysis(yestWeekReqDTO);
+        List<Long> contentsAnalysis = orderRepository.findByIdInContentsAnalysis(yestWeekReqDTO);
 
-        List<Category> contentsOrderSort = contentsAnalysis.stream()
+        List<Long> contentsOrderSort = contentsAnalysis.stream()
                                                         .sorted()
                                                         .collect(Collectors.toList());
 
-        List<ContentsOrderDTO> response = new ArrayList<>();
+//        List<ContentsOrderDTO> response = new ArrayList<>();
+//
+//        modelMapper.map(contentsOrderSort, response);
 
-        modelMapper.map(contentsOrderSort, response);
-
-        return response;
+        return contentsOrderSort;
 
     }
 
@@ -106,9 +106,9 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<Member> contentsAnalysis = orderRepository.findWeeklyVisitsInMember(yestWeekReqDTO);
+        List<WeeklyVisitsDTO> contentsAnalysis = orderRepository.findWeeklyVisitsInMember(yestWeekReqDTO);
 
-        List<Member> memberVisitsSort = contentsAnalysis.stream()
+        List<WeeklyVisitsDTO> memberVisitsSort = contentsAnalysis.stream()
                 .sorted()
                 .collect(Collectors.toList());
 

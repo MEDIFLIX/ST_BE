@@ -10,7 +10,7 @@ public interface OrderService {
 
     List<Long> selectMemberDepartment();
 
-    List<ContentsOrderDTO> selectContent();
+    List<Long> selectContent();
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
 
