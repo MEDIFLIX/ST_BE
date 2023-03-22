@@ -70,10 +70,10 @@ public class BoardController {
     @GetMapping("/list")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>> list(HttpSession session) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
         // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        if (optionalAdmin.isPresent()) {
             List<BoardResponseDTO> list = boardService.list();
             return new ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>>(
                     new BaseResponseBody<List<BoardResponseDTO>>(
@@ -83,15 +83,15 @@ public class BoardController {
                     ),
                     HttpStatus.OK
             );
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>>(
-                    new BaseResponseBody<List<BoardResponseDTO>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>>(
+//                    new BaseResponseBody<List<BoardResponseDTO>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 }
