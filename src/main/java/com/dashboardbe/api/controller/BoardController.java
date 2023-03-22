@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+//@CrossOrigin(origins = "http://localhost:3000",  allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*",  allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/board")
@@ -33,7 +35,7 @@ public class BoardController {
      */
     @Operation(summary = "[테스트용] 게시물 작성 API", description = "게시물 작성")
     @PostMapping("")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<String>> addMemo(@RequestBody BoardRequestDTO dto, HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
         Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
@@ -66,7 +68,7 @@ public class BoardController {
      */
     @Operation(summary = "[게시판] 게시물 리스트 API", description = "게시물 리스트")
     @GetMapping("/list")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<BoardResponseDTO>>> list(HttpSession session) {
         String loginId = SessionUtil.getLoginId(session);
         Optional<Admin> optionalAdmin = adminRepository.findById(loginId);

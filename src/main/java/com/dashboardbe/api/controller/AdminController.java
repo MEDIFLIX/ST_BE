@@ -15,9 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+//@CrossOrigin(origins = "http://localhost:3000",  allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*",  allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin")
@@ -41,28 +44,28 @@ public class AdminController {
      */
     @Operation(summary = "[관리자] 로그인 API", description = "관리자 로그인 처리하고 세션 생성")
     @PostMapping("/login")
-    public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+    public ResponseEntity<BaseResponseBody<String>> login(@RequestBody LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse httpServletResponse) {
         String loginId = adminService.login(loginDTO);
         // 회원이 아닌 경우
         if (loginId.equals("NO_DATA")) {
             return new ResponseEntity<BaseResponseBody<String>>(
                     new BaseResponseBody<String>(
-                            HttpStatus.NOT_FOUND.value(),
+                            HttpStatus.BAD_REQUEST.value(),
                             "회원 정보가 존재하지 않습니다.",
                             "NO_DATA"
                     ),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.BAD_REQUEST
             );
         }
         // 비밀번호가 틀린 경우
         else if (loginId.equals("WRONG_PWD")) {
             return new ResponseEntity<BaseResponseBody<String>>(
                     new BaseResponseBody<String>(
-                            HttpStatus.NOT_FOUND.value(),
+                            HttpStatus.BAD_REQUEST.value(),
                             "비밀번호가 틀렸습니다.",
                             "WRONG_PWD"
                     ),
-                    HttpStatus.NOT_FOUND
+                    HttpStatus.BAD_REQUEST
             );
         }
         // 로그인 성공한 경우
@@ -72,6 +75,18 @@ public class AdminController {
             HttpSession session = request.getSession();
             // 세션에 로그인 아이디 정보 저장
             SessionUtil.setLoginId(session, loginId);
+
+//            ResponseCookie cookie = ResponseCookie.from("access-token", IToken);
+//            ResponseCookie cookie = ResponseCookie.from("JSESSIONID", session.getId())
+//                    .path("/")
+//                    .sameSite("None")
+//                    .httpOnly(true)
+//                    .
+//                    .secure(false)
+//                    .build();
+
+//            httpServletResponse.setHeader("Set-Cookie", "JSESSIONID"+"="+session.getId()+";"+"  Secure; SameSite=None");
+
             return new ResponseEntity<BaseResponseBody<String>>(
                     new BaseResponseBody<String>(
                             HttpStatus.OK.value(),

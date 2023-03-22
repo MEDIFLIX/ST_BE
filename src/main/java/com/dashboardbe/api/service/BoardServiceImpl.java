@@ -22,7 +22,7 @@ public class BoardServiceImpl implements BoardService {
      * 게시물 작성 서비스 로직
      */
     @Override
-    @LoginCheck
+//    @LoginCheck
     public void save(String content, Admin admin) {
         Board board = Board.builder()
                         .admin(admin)
@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
      * 게시물 리스트 서비스 로직
      */
     @Override
-    @LoginCheck
+//    @LoginCheck
     public List<BoardResponseDTO> list() {
         // 최신 게시물 순으로 sort
         List<Board> boards = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
         for (Board board : boards) {
             BoardResponseDTO boardResponseDTO = BoardResponseDTO.builder()
                     .id(board.getId())
-                    .adminId(board.getAdmin().getId())
+                    .name(board.getAdmin().getName())
                     .content(board.getContent())
                     .createDate(board.getCreateDate().toLocalDate())
                     .build();

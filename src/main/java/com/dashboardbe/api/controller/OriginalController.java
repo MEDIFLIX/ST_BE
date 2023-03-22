@@ -13,15 +13,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*",  allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/original")
@@ -36,7 +34,7 @@ public class OriginalController {
      */
     @Operation(summary = "주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
     @GetMapping(value = "selectWeeklyInfo")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>> selectWeeklyInfo(
             HttpSession session
     ) {
@@ -76,7 +74,7 @@ public class OriginalController {
      */
     @Operation(summary = "컨텐츠 검색 결과 조회 API", description = "컨텐츠 검색 결과를 조회한다.")
     @GetMapping(value = "selectContentsInfo")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>> selectContentsInfo(
             @RequestParam OriginalContentsDTO.Req request,
             HttpSession session

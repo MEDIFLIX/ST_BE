@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*",  allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/order")
@@ -34,7 +36,7 @@ public class OrderController {
      */
     @Operation(summary = "[테스트용] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyHospital")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyHospital(
             HttpSession session
     ) {
@@ -71,7 +73,7 @@ public class OrderController {
      */
     @Operation(summary = "[테스트용] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyDepartment")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyDepartment(
             HttpSession session
     ) {
@@ -108,7 +110,7 @@ public class OrderController {
      */
     @Operation(summary = "컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyContents(
             HttpSession session
     ) {
@@ -145,7 +147,7 @@ public class OrderController {
      */
     @Operation(summary = "주간 방문자 분석 조회 API", description = "주간 방문자 분석 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyVisits")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>> selectWeeklyVisits(
             HttpSession session
     ) {
@@ -182,7 +184,7 @@ public class OrderController {
      */
     @Operation(summary = "변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectContentsChanges")
-    @LoginCheck
+//    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Integer>>> selectContentsChanges(
             HttpSession session
     ) {
