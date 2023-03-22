@@ -1,5 +1,6 @@
 package com.dashboardbe.api.repository;
 
+import com.dashboardbe.api.dto.ContentsChangesDTO;
 import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
 import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.api.dto.original.OriginalContentsDTO;
@@ -8,6 +9,7 @@ import com.dashboardbe.domain.MemberAnalysis;
 import com.dashboardbe.domain.QContents;
 import com.dashboardbe.domain.QMember;
 import com.dashboardbe.domain.QMemberAnalysis;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -37,20 +39,27 @@ public class OriginalRepository extends QuerydslRepositorySupport {
 
         return (List<OriginalWeeklyInfoDTO.Res>) jpaQueryFactory
                 .select(
-                        JPAExpressions
-                                .select(c.hits.max())
-                                .from(c),
-                        JPAExpressions
-                                .select(m.hospital.max())
-                                .from(m),
-                        JPAExpressions
-                                .select(m.medicalDepartment.max())
-                                .from(m),
-                        JPAExpressions
-                                .select(c.hits.sum())
-                                .from(c)
+
+                        Projections.fields(
+
+                                OriginalWeeklyInfoDTO.Res.class,
+
+                            JPAExpressions
+                                    .select(c.hits.max())
+                                    .from(c),
+                            JPAExpressions
+                                    .select(m.hospital.max())
+                                    .from(m),
+                            JPAExpressions
+                                    .select(m.medicalDepartment.max())
+                                    .from(m),
+                            JPAExpressions
+                                    .select(c.hits.sum())
+                                    .from(c)
+                        )
+
                 )
-                .fetchAll();
+                .fetch();
 
 
     }
@@ -59,19 +68,27 @@ public class OriginalRepository extends QuerydslRepositorySupport {
 
     QContents c = QContents.contents;
 
-        return (List<OriginalContentsDTO.Res>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
-                        c.category,
-                        c.hits,
-                        c.uploadDate,
-                        c.title
+
+                        Projections.fields(
+
+                                OriginalContentsDTO.Res.class,
+
+                                c.category,
+                                c.hits,
+                                c.uploadDate,
+                                c.title
+
+                        )
+
                 )
                 .from(c)
                 .where(
                         c.title.eq(request.getSearchWord()),
                         c.countYn.eq("Y")
                 )
-                .fetchAll();
+                .fetch();
 
     }
 

@@ -122,20 +122,28 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         QContentsAnalysis m = QContentsAnalysis.contentsAnalysis;
 
-        return (List<ContentsChangesDTO.Req>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
-                        JPAExpressions
-                                .select(m.category.count())
-                                .from(m)
-                                .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
-                        JPAExpressions
-                                .select(m.category.count())
-                                .from(m)
-                                .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek()))
+
+                        Projections.fields(
+
+                                ContentsChangesDTO.Req.class,
+
+                            JPAExpressions
+                                    .select(m.category.count().as("thisWeek"))
+                                    .from(m)
+                                    .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                            JPAExpressions
+                                    .select(m.category.count().as("pastWeek"))
+                                    .from(m)
+                                    .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek()))
+
+                        )
+
                 )
                 .from(m)
                 .groupBy(m.id)
-                .fetchAll();
+                .fetch();
 
     }
 
