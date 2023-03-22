@@ -47,7 +47,7 @@ public class OriginalRepository extends QuerydslRepositorySupport {
                                 .select(m.medicalDepartment.max())
                                 .from(m),
                         JPAExpressions
-                                .select(c.hits)
+                                .select(c.hits.sum())
                                 .from(c)
                 )
                 .fetchAll();
@@ -67,7 +67,10 @@ public class OriginalRepository extends QuerydslRepositorySupport {
                         c.title
                 )
                 .from(c)
-                .where(c.title.eq(request.getSearchWord()))
+                .where(
+                        c.title.eq(request.getSearchWord()),
+                        c.countYn.eq("Y")
+                )
                 .fetchAll();
 
     }
