@@ -2,6 +2,7 @@ package com.dashboardbe.api.repository;
 
 import com.dashboardbe.api.dto.*;
 import com.dashboardbe.domain.*;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -129,14 +130,18 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                                 ContentsChangesDTO.Req.class,
 
-                            JPAExpressions
-                                    .select(m.category.count().as("thisWeek"))
+                                ExpressionUtils.as(
+                                        JPAExpressions
+                                    .select(m.category.count())
                                     .from(m)
                                     .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
-                            JPAExpressions
-                                    .select(m.category.count().as("pastWeek"))
+                                    "thisWeek"),
+                                ExpressionUtils.as(
+                                    JPAExpressions
+                                    .select(m.category.count())
                                     .from(m)
-                                    .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek()))
+                                    .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek())),
+                                    "pastWeek")
 
                         )
 

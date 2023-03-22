@@ -9,6 +9,7 @@ import com.dashboardbe.domain.MemberAnalysis;
 import com.dashboardbe.domain.QContents;
 import com.dashboardbe.domain.QMember;
 import com.dashboardbe.domain.QMemberAnalysis;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -37,25 +38,33 @@ public class OriginalRepository extends QuerydslRepositorySupport {
         QContents c = QContents.contents;
         QMember m = QMember.member;
 
-        return (List<OriginalWeeklyInfoDTO.Res>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
 
                         Projections.fields(
 
                                 OriginalWeeklyInfoDTO.Res.class,
 
-                            JPAExpressions
+                            ExpressionUtils.as(
+                                JPAExpressions
                                     .select(c.hits.max())
                                     .from(c),
-                            JPAExpressions
+                                    "maxCount"),
+                            ExpressionUtils.as(
+                                    JPAExpressions
                                     .select(m.hospital.max())
                                     .from(m),
-                            JPAExpressions
+                                "hospital"),
+                            ExpressionUtils.as(
+                                    JPAExpressions
                                     .select(m.medicalDepartment.max())
                                     .from(m),
-                            JPAExpressions
+                                "department"),
+                            ExpressionUtils.as(
+                                    JPAExpressions
                                     .select(c.hits.sum())
-                                    .from(c)
+                                    .from(c),
+                                    "totCount")
                         )
 
                 )
@@ -75,10 +84,10 @@ public class OriginalRepository extends QuerydslRepositorySupport {
 
                                 OriginalContentsDTO.Res.class,
 
-                                c.category,
-                                c.hits,
-                                c.uploadDate,
-                                c.title
+                                c.category.as("category"),
+                                c.hits.as("hits"),
+                                c.uploadDate.as("uploadDate"),
+                                c.title.as("title")
 
                         )
 

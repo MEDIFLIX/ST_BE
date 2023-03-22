@@ -19,14 +19,16 @@ public class OriginalContentsDTO {
     @Data
     public class Res {
         private String title;
-        private String count;
-        private String creDate;
+        private String category;
+        private String hits;
+        private String uploadDate;
 
         @QueryProjection
-        public Res(String title, String count, String creDate) {
+        public Res(String title, String hits, String category, String uploadDate) {
             this.title = title;
-            this.count = count;
-            this.creDate = creDate;
+            this.hits = hits;
+            this.category = category;
+            this.uploadDate = uploadDate;
         }
 
     }
