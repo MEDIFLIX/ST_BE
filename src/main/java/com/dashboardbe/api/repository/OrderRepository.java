@@ -27,33 +27,33 @@ public class OrderRepository extends QuerydslRepositorySupport {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    public List<MemberOrderHospitalDTO> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<Long> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<MemberOrderHospitalDTO>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
-                        m.hospital.count()
+                        m.hospital.count().as("hospital")
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
-                .fetchAll();
+                .fetch();
 
     }
 
-    public List<MemberOrderDepartmentDTO> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<Long> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<MemberOrderDepartmentDTO>) jpaQueryFactory
+        return (List<Long>) jpaQueryFactory
                 .select(
-                        m.medicalDepartment.count()
+                        m.medicalDepartment.count().as("medicalDepartment")
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.id)
-                .fetchAll();
+                .fetch();
 
     }
 

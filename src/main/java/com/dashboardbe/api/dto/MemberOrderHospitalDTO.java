@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class MemberOrderHospitalDTO {
 
-    private String hospital;
+    private Integer hospital;
 
 }

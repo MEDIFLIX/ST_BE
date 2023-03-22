@@ -24,12 +24,12 @@ public class MemberAnalysis {
     @Enumerated(value = EnumType.STRING)
     private MedicalDepartment medicalDepartment;
 
-    private String hospital;
+    private Integer hospital;
 
     private LocalDateTime visitDate;
 
     @Builder
-    public MemberAnalysis(Member member, MedicalDepartment medicalDepartment, String hospital) {
+    public MemberAnalysis(Member member, MedicalDepartment medicalDepartment, Integer hospital) {
         this.member = member;
         this.medicalDepartment = medicalDepartment;
         this.hospital = hospital;
