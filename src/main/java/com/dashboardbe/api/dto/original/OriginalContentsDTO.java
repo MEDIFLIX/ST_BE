@@ -10,10 +10,15 @@ public class OriginalContentsDTO {
 
     @Getter
     @Setter
-    @AllArgsConstructor
-    public class Req {
+    public static class Req {
         private String countYn;
         private String searchWord;
+
+        public Req(String countYn, String searchWord) {
+            this.countYn = countYn;
+            this.searchWord = searchWord;
+        }
+
     }
 
     @Data

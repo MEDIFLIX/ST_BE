@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.util.Elements;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -76,7 +77,8 @@ public class OriginalController {
     @GetMapping(value = "selectContentsInfo")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>> selectContentsInfo(
-            @RequestParam OriginalContentsDTO.Req request,
+            @RequestParam String countYn,
+            @RequestParam String searchWord,
             HttpSession session
     ) {
 
@@ -84,6 +86,8 @@ public class OriginalController {
 //        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
+
+        OriginalContentsDTO.Req request = new OriginalContentsDTO.Req(countYn, searchWord);
 
             List<OriginalContentsDTO.Res> ContentsInfo = originalService.selectContentsInfo(request);
 
