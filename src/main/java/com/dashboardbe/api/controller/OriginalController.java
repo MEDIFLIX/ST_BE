@@ -34,7 +34,7 @@ public class OriginalController {
     /**
      * 주간 정보 가져오기 GET
      */
-    @Operation(summary = "주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
+    @Operation(summary = "[오리지널] 주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
     @GetMapping(value = "selectWeeklyInfo")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>> selectWeeklyInfo(
@@ -74,7 +74,7 @@ public class OriginalController {
     /**
      * 컨텐츠 검색 결과 가져오기 GET
      */
-    @Operation(summary = "컨텐츠 검색 결과 조회 API", description = "컨텐츠 검색 결과를 조회한다.")
+    @Operation(summary = "[테스트용] 컨텐츠 검색 결과 조회 API", description = "컨텐츠 검색 결과를 조회한다.")
     @GetMapping(value = "selectContentsInfo")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>> selectContentsInfo(
