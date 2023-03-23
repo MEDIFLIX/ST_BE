@@ -36,8 +36,11 @@ public class OrderRepository extends QuerydslRepositorySupport {
                         m.hospital.count().as("hospital")
                 )
                 .from(m)
-                .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
-                .groupBy(m.id)
+                .where(
+                        m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())
+                )
+                .groupBy(m.hospital)
+                .limit(3)
                 .fetch();
 
     }
@@ -52,7 +55,8 @@ public class OrderRepository extends QuerydslRepositorySupport {
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
-                .groupBy(m.id)
+                .groupBy(m.medicalDepartment)
+                .limit(3)
                 .fetch();
 
     }
@@ -67,7 +71,8 @@ public class OrderRepository extends QuerydslRepositorySupport {
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
-                .groupBy(m.id)
+                .groupBy(m.category)
+                .limit(3)
                 .fetch();
 
     }
@@ -163,7 +168,6 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                 )
                 .from(m)
-                .groupBy(m.id)
                 .fetch();
 
     }
