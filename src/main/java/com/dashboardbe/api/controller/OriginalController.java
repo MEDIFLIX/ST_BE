@@ -3,6 +3,7 @@ package com.dashboardbe.api.controller;
 import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.original.OriginalContentsDTO;
 import com.dashboardbe.api.dto.original.OriginalWeeklyInfoDTO;
+import com.dashboardbe.api.dto.original.WeeklyInfoResponseDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OriginalService;
 import com.dashboardbe.common.SessionUtil;
@@ -36,7 +37,7 @@ public class OriginalController {
     @Operation(summary = "주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
     @GetMapping(value = "selectWeeklyInfo")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>> selectWeeklyInfo(
+    public ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>> selectWeeklyInfo(
             HttpSession session
     ) {
 
@@ -45,10 +46,10 @@ public class OriginalController {
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
 
-            List<OriginalWeeklyInfoDTO.Res> weeklyInfo = originalService.selectWeeklyInfo();
+            WeeklyInfoResponseDTO weeklyInfo = originalService.selectWeeklyInfo();
 
-            return new ResponseEntity<BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>>(
-                    new BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>(
+            return new ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>>(
+                    new BaseResponseBody<WeeklyInfoResponseDTO>(
                             HttpStatus.OK.value(),
                             "성공",
                             weeklyInfo
