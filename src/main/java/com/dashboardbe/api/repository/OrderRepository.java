@@ -52,9 +52,6 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         return (List<MedicalDepartment>) jpaQueryFactory
                 .select(
-                        /**
-                         * 여기 수정해야 함 -> 진료과명 추출
-                         */
                         m.medicalDepartment.as("medicalDepartment")
                 )
                 .from(m)

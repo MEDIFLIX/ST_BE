@@ -18,4 +18,5 @@ public class WeeklyVisitsDTO {
         this.ContentsHits = contentsHits;
         this.quit = quit;
     }
+
 }
