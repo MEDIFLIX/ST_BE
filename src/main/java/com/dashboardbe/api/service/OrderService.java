@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface OrderService {
 
-    List<Long> selectMemberHospital();
+    List<String> selectMemberHospital();
 
-    List<Long> selectMemberDepartment();
+    List<String> selectMemberDepartment();
 
     List<Long> selectContent();
 

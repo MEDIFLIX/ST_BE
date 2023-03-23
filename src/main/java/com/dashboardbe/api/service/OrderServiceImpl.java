@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<Long> selectMemberHospital() {
+    public List<String> selectMemberHospital() {
 
         // 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -31,22 +31,22 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<Long> memberAnalysis = orderRepository.selectHospitalInMemberAnalysis(yestWeekReqDTO);
+        List<String> memberAnalysis = orderRepository.selectHospitalInMemberAnalysis(yestWeekReqDTO);
 
-        List<Long> hospitalSorted = memberAnalysis.stream()
-                                                        .sorted()
-                                                        .collect(Collectors.toList());
+//        List<Long> hospitalSorted = memberAnalysis.stream()
+//                                                        .sorted()
+//                                                        .collect(Collectors.toList());
 
 //        List<MemberOrderHospitalDTO> response = new ArrayList<>();
 //
 //        modelMapper.map(hospitalSorted, response);
 
-        return hospitalSorted;
+        return memberAnalysis;
 
     }
 
     @Override
-    public List<Long> selectMemberDepartment() {
+    public List<String> selectMemberDepartment() {
 
         // 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -56,17 +56,17 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<Long> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
+        List<String> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
 
-        List<Long> hospitalSorted = memberAnalysis.stream()
-                                                        .sorted()
-                                                        .collect(Collectors.toList());
+//        List<Long> hospitalSorted = memberAnalysis.stream()
+//                                                        .sorted()
+//                                                        .collect(Collectors.toList());
 
 //        List<MemberOrderDepartmentDTO> response = new ArrayList<>();
 //
 //        modelMapper.map(hospitalSorted, response);
 
-        return hospitalSorted;
+        return memberAnalysis;
 
     }
 

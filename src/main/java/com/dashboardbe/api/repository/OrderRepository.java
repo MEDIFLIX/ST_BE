@@ -27,35 +27,43 @@ public class OrderRepository extends QuerydslRepositorySupport {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    public List<Long> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<String> selectHospitalInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
         return jpaQueryFactory
                 .select(
-                        m.hospital.count().as("hospital")
+                        /**
+                         * 여기 수정해야 함 -> 병원명 추출
+                         */
+//                        m.hospital.count().as("hospital")
                 )
                 .from(m)
                 .where(
                         m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())
                 )
                 .groupBy(m.hospital)
+                .orderBy(m.hospital.count().desc())
                 .limit(3)
                 .fetch();
 
     }
 
-    public List<Long> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<String> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<Long>) jpaQueryFactory
+        return (List<String>) jpaQueryFactory
                 .select(
-                        m.medicalDepartment.count().as("medicalDepartment")
+                        /**
+                         * 여기 수정해야 함 -> 진료과명 추출
+                         */
+//                        m.medicalDepartment.count().as("medicalDepartment")
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
                 .groupBy(m.medicalDepartment)
+                .orderBy(m.medicalDepartment.count().desc())
                 .limit(3)
                 .fetch();
 

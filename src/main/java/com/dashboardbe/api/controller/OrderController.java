@@ -37,35 +37,35 @@ public class OrderController {
     @Operation(summary = "[테스트용] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyHospital")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyHospital(
+    public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyHospital(
             HttpSession session
     ) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-        // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        // 올바른 관리자라면
+//        if (optionalAdmin.isPresent()) {
 
-            List<Long> memberOrderHospitalDTOList = orderService.selectMemberHospital();
+            List<String> memberOrderHospitalDTOList = orderService.selectMemberHospital();
 
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
+            return new ResponseEntity<BaseResponseBody<List<String>>>(
+                    new BaseResponseBody<List<String>>(
                             HttpStatus.OK.value(),
                             "성공",
                             memberOrderHospitalDTOList
                     ),
                     HttpStatus.OK
             );
-
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+//                    new BaseResponseBody<List<Long>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 
     /**
@@ -74,18 +74,18 @@ public class OrderController {
     @Operation(summary = "[테스트용] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyDepartment")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyDepartment(
+    public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyDepartment(
             HttpSession session
     ) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-        // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        // 올바른 관리자라면
+//        if (optionalAdmin.isPresent()) {
 
-            List<Long> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
+            List<String> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
 
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
+            return new ResponseEntity<BaseResponseBody<List<String>>>(
+                    new BaseResponseBody<List<String>>(
                             HttpStatus.OK.value(),
                             "성공",
                             memberOrderDepartmentDTOList
@@ -93,16 +93,16 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+//                    new BaseResponseBody<List<Long>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 
     /**
@@ -114,10 +114,10 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyContents(
             HttpSession session
     ) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-        // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        // 올바른 관리자라면
+//        if (optionalAdmin.isPresent()) {
 
             List<Long> contentsOrderDTOList = orderService.selectContent();
 
@@ -130,16 +130,16 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+//                    new BaseResponseBody<List<Long>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 
     /**
@@ -151,10 +151,10 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>> selectWeeklyVisits(
             HttpSession session
     ) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-        // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        // 올바른 관리자라면
+//        if (optionalAdmin.isPresent()) {
 
             List<WeeklyVisitsDTO> weeklyVisitsDTOList = orderService.selectWeeklyVisits();
 
@@ -167,16 +167,16 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
-                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
+//                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 
     /**
@@ -188,10 +188,10 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<Long>>> selectContentsChanges(
             HttpSession session
     ) {
-        String loginId = SessionUtil.getLoginId(session);
-        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-        // 올바른 관리자라면
-        if (optionalAdmin.isPresent()) {
+//        String loginId = SessionUtil.getLoginId(session);
+//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
+//        // 올바른 관리자라면
+//        if (optionalAdmin.isPresent()) {
 
             List<Long> changes = orderService.selectContentChanges();
 
@@ -204,16 +204,16 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-        } else {
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
-                            HttpStatus.NOT_FOUND.value(),
-                            "존재하지 않는 Admin ID입니다.",
-                            null
-                    ),
-                    HttpStatus.NOT_FOUND
-            );
-        }
+//        } else {
+//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+//                    new BaseResponseBody<List<Long>>(
+//                            HttpStatus.NOT_FOUND.value(),
+//                            "존재하지 않는 Admin ID입니다.",
+//                            null
+//                    ),
+//                    HttpStatus.NOT_FOUND
+//            );
+//        }
     }
 
 }
