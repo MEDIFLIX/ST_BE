@@ -18,13 +18,13 @@ public class OriginalWeeklyInfoDTO {
     @Data
     public class Res {
 
-        private Integer totCount;
-        private Integer maxCount;
-        private String department;
-        private String hospital;
+        private Long totCount;
+        private Long maxCount;
+        private Long department;
+        private Integer hospital;
 
         @QueryProjection
-        public Res(Integer totCount, Integer maxCount, String department, String hospital) {
+        public Res(Long totCount, Long maxCount, Long department, Integer hospital) {
             this.totCount = totCount;
             this.maxCount = maxCount;
             this.department = department;

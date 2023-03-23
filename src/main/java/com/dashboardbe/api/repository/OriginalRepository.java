@@ -57,7 +57,7 @@ public class OriginalRepository extends QuerydslRepositorySupport {
                                 "hospital"),
                             ExpressionUtils.as(
                                     JPAExpressions
-                                    .select(m.medicalDepartment.max())
+                                    .select(m.medicalDepartment.count().max())
                                     .from(m),
                                 "department"),
                             ExpressionUtils.as(
@@ -68,6 +68,9 @@ public class OriginalRepository extends QuerydslRepositorySupport {
                         )
 
                 )
+                .from(m)
+                .leftJoin(c)
+                .on(m.id.eq(c.id.stringValue()))
                 .fetch();
 
 

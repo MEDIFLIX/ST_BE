@@ -84,30 +84,42 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                                 WeeklyVisitsDTO.class,
 
-                            JPAExpressions
-                                    .select(c.contents.count().as("ContentsHits"))
-                                    .from(c)
-                                    .where(c.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                            ExpressionUtils.as(
+                                    JPAExpressions
+                                            .select(c.contents.count())
+                                            .from(c)
+                                            .where(c.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                                    "ContentsHits"
+                            ),
 
-                            JPAExpressions
-                                    .select(m.name.count().as("all"))
-                                    .from(m)
-                                    .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                            ExpressionUtils.as(
+                                    JPAExpressions
+                                            .select(m.name.count())
+                                            .from(m)
+                                            .where(m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                                    "all"
+                            ),
 
-                            JPAExpressions
-                                    .select(m.name.count().as("quit"))
-                                    .from(m)
-                                    .where(
-                                            m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
-                                            m.isMember.eq("N")
-                                    ),
+                            ExpressionUtils.as(
+                                    JPAExpressions
+                                            .select(m.name.count())
+                                            .from(m)
+                                            .where(
+                                                    m.createTime.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()),
+                                                    m.isMember.eq("N")
+                                            ),
+                                    "quit"
+                            ),
 
-                            JPAExpressions
-                                    .select(m.name.count().as("newbie"))
-                                    .from(m)
-                                    .where(
-                                            m.createTime.between(LocalDateTime.now().minusDays(2), LocalDateTime.now().minusDays(1))
-                                    )
+                            ExpressionUtils.as(
+                                    JPAExpressions
+                                            .select(m.name.count())
+                                            .from(m)
+                                            .where(
+                                                    m.createTime.between(LocalDateTime.now().minusDays(2), LocalDateTime.now().minusDays(1))
+                                            ),
+                                    "newbie"
+                            )
 
                         )
 
@@ -130,18 +142,22 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                                 ContentsChangesDTO.Req.class,
 
-                                ExpressionUtils.as(
-                                        JPAExpressions
-                                    .select(m.category.count())
-                                    .from(m)
-                                    .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
-                                    "thisWeek"),
-                                ExpressionUtils.as(
-                                    JPAExpressions
-                                    .select(m.category.count())
-                                    .from(m)
-                                    .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek())),
-                                    "pastWeek")
+                                Math.toIntExact(
+                                        ExpressionUtils.as(
+                                                JPAExpressions
+                                                        .select(m.category.count())
+                                                        .from(m)
+                                                        .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
+                                                "thisWeek")
+                                ),
+                                Math.toIntExact(
+                                        ExpressionUtils.as(
+                                                JPAExpressions
+                                                        .select(m.category.count())
+                                                        .from(m)
+                                                        .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek())),
+                                                "pastWeek")
+                                )
 
                         )
 
