@@ -35,7 +35,7 @@ public class OrderController {
     /**
      * 주간 진료 병원 순위 get api
      */
-    @Operation(summary = "[테스트용] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
+    @Operation(summary = "[주간정보] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyHospital")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyHospital(
@@ -72,7 +72,7 @@ public class OrderController {
     /**
      * 주간 진료 과목 순위 조회 Get api
      */
-    @Operation(summary = "[테스트용] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
+    @Operation(summary = "[주간정보] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyDepartment")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<MedicalDepartment>>> selectWeeklyDepartment(
@@ -109,7 +109,7 @@ public class OrderController {
     /**
      * 주간 컨텐츠 순위 변동 get api
      */
-    @Operation(summary = "컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
+    @Operation(summary = "[주간정보] 컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyContents(
@@ -146,7 +146,7 @@ public class OrderController {
     /**
      * 주간 방문자 분석 api
      */
-    @Operation(summary = "주간 방문자 분석 조회 API", description = "주간 방문자 분석 정보를 조회 후 제공한다.")
+    @Operation(summary = "[주간정보] 주간 방문자 분석 조회 API", description = "주간 방문자 분석 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyVisits")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>> selectWeeklyVisits(
@@ -183,7 +183,7 @@ public class OrderController {
     /**
      * 주간 변동률 수치 계산 api
      */
-    @Operation(summary = "변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
+    @Operation(summary = "[주간정보] 변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectContentsChanges")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectContentsChanges(
