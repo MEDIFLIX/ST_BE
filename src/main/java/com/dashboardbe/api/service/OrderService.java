@@ -14,6 +14,6 @@ public interface OrderService {
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
 
-    List<Integer> selectContentChanges();
+    List<Long> selectContentChanges();
 
 }

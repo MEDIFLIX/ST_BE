@@ -10,11 +10,11 @@ public class ContentsChangesDTO {
 
     @Data
     public class Req {
-        private Integer thisWeek;
-        private Integer pastWeek;
+        private Long thisWeek;
+        private Long pastWeek;
 
         @QueryProjection
-        public Req(Integer thisWeek, Integer pastWeek) {
+        public Req(Long thisWeek, Long pastWeek) {
             this.thisWeek = thisWeek;
             this.pastWeek = pastWeek;
         }

@@ -185,7 +185,7 @@ public class OrderController {
     @Operation(summary = "변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectContentsChanges")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<Integer>>> selectContentsChanges(
+    public ResponseEntity<BaseResponseBody<List<Long>>> selectContentsChanges(
             HttpSession session
     ) {
         String loginId = SessionUtil.getLoginId(session);
@@ -193,10 +193,10 @@ public class OrderController {
         // 올바른 관리자라면
         if (optionalAdmin.isPresent()) {
 
-            List<Integer> changes = orderService.selectContentChanges();
+            List<Long> changes = orderService.selectContentChanges();
 
-            return new ResponseEntity<BaseResponseBody<List<Integer>>>(
-                    new BaseResponseBody<List<Integer>>(
+            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+                    new BaseResponseBody<List<Long>>(
                             HttpStatus.OK.value(),
                             "성공",
                             changes
@@ -205,8 +205,8 @@ public class OrderController {
             );
 
         } else {
-            return new ResponseEntity<BaseResponseBody<List<Integer>>>(
-                    new BaseResponseBody<List<Integer>>(
+            return new ResponseEntity<BaseResponseBody<List<Long>>>(
+                    new BaseResponseBody<List<Long>>(
                             HttpStatus.NOT_FOUND.value(),
                             "존재하지 않는 Admin ID입니다.",
                             null

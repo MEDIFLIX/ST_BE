@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 public class WeeklyVisitsDTO {
 
-    private Integer all;
-    private Integer newbie;
-    private Integer ContentsHits;
-    private Integer quit;
+    private Long newbie;
+    private Long all;
+    private Long ContentsHits;
+    private Long quit;
 
     @QueryProjection
-    public WeeklyVisitsDTO(Integer all, Integer newbie, Integer contentsHits, Integer quit) {
+    public WeeklyVisitsDTO(Long all, Long newbie, Long contentsHits, Long quit) {
         this.all = all;
         this.newbie = newbie;
         this.ContentsHits = contentsHits;

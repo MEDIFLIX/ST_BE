@@ -147,22 +147,22 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                                 ContentsChangesDTO.Req.class,
 
-                                Math.toIntExact(
+//                                Math.toIntExact(
                                         ExpressionUtils.as(
                                                 JPAExpressions
                                                         .select(m.category.count())
                                                         .from(m)
                                                         .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay())),
-                                                "thisWeek")
-                                ),
-                                Math.toIntExact(
+                                                "thisWeek"),
+//                                ),
+//                                Math.toIntExact(
                                         ExpressionUtils.as(
                                                 JPAExpressions
                                                         .select(m.category.count())
                                                         .from(m)
                                                         .where(m.visitDate.between(yestWeekReqDTO.getPastWeek(), yestWeekReqDTO.getYestWeek())),
                                                 "pastWeek")
-                                )
+//                                )
 
                         )
 

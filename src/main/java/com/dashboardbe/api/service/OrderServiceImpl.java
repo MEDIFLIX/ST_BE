@@ -121,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Integer> selectContentChanges() {
+    public List<Long> selectContentChanges() {
 
         // 이번 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<ContentsChangesDTO.Req> Info = orderRepository.findYestContentChanges(yestWeekReqDTO);
 
-        List<Integer> result = null;
+        List<Long> result = null;
 
         for (ContentsChangesDTO.Req req : Info) {
             result.add(req.getThisWeek() - req.getPastWeek());
