@@ -7,6 +7,7 @@ import com.dashboardbe.api.service.OrderService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
+import com.dashboardbe.domain.Category;
 import com.dashboardbe.domain.MedicalDepartment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yaml.snakeyaml.tokens.ScalarToken;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -112,7 +114,7 @@ public class OrderController {
     @Operation(summary = "[주간정보] 컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<Long>>> selectWeeklyContents(
+    public ResponseEntity<BaseResponseBody<List<Category>>> selectWeeklyContents(
             HttpSession session
     ) {
 //        String loginId = SessionUtil.getLoginId(session);
@@ -120,10 +122,10 @@ public class OrderController {
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
 
-            List<Long> contentsOrderDTOList = orderService.selectContent();
+            List<Category> contentsOrderDTOList = orderService.selectContent();
 
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
+            return new ResponseEntity<BaseResponseBody<List<Category>>>(
+                    new BaseResponseBody<List<Category>>(
                             HttpStatus.OK.value(),
                             "성공",
                             contentsOrderDTOList

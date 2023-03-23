@@ -1,6 +1,7 @@
 package com.dashboardbe.api.service;
 
 import com.dashboardbe.api.dto.*;
+import com.dashboardbe.domain.Category;
 import com.dashboardbe.domain.MedicalDepartment;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface OrderService {
 
     List<MedicalDepartment> selectMemberDepartment();
 
-    List<Long> selectContent();
+    List<Category> selectContent();
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
 

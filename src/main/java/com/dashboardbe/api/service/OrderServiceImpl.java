@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Long> selectContent() {
+    public List<Category> selectContent() {
 
         // 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -82,9 +82,9 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<Long> contentsAnalysis = orderRepository.findByIdInContentsAnalysis(yestWeekReqDTO);
+        List<Category> contentsAnalysis = orderRepository.findByIdInContentsAnalysis(yestWeekReqDTO);
 
-        List<Long> contentsOrderSort = contentsAnalysis.stream()
+        List<Category> contentsOrderSort = contentsAnalysis.stream()
                                                         .sorted()
                                                         .collect(Collectors.toList());
 
