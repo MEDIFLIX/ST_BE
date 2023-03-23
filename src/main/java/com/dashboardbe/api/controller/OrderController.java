@@ -7,6 +7,7 @@ import com.dashboardbe.api.service.OrderService;
 import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
 import com.dashboardbe.domain.Admin;
+import com.dashboardbe.domain.MedicalDepartment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,7 @@ public class OrderController {
     @Operation(summary = "[테스트용] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
     @GetMapping(value = "selectWeeklyDepartment")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyDepartment(
+    public ResponseEntity<BaseResponseBody<List<MedicalDepartment>>> selectWeeklyDepartment(
             HttpSession session
     ) {
 //        String loginId = SessionUtil.getLoginId(session);
@@ -82,10 +83,10 @@ public class OrderController {
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
 
-            List<String> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
+            List<MedicalDepartment> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
 
-            return new ResponseEntity<BaseResponseBody<List<String>>>(
-                    new BaseResponseBody<List<String>>(
+            return new ResponseEntity<BaseResponseBody<List<MedicalDepartment>>>(
+                    new BaseResponseBody<List<MedicalDepartment>>(
                             HttpStatus.OK.value(),
                             "성공",
                             memberOrderDepartmentDTOList

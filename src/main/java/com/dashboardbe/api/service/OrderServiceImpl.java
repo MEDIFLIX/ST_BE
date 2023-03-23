@@ -3,6 +3,7 @@ package com.dashboardbe.api.service;
 import com.dashboardbe.api.dto.*;
 import com.dashboardbe.api.repository.OrderRepository;
 import com.dashboardbe.domain.Category;
+import com.dashboardbe.domain.MedicalDepartment;
 import com.dashboardbe.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -46,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<String> selectMemberDepartment() {
+    public List<MedicalDepartment> selectMemberDepartment() {
 
         // 한주간 날짜 dto 에 담기
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(1);
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         yestWeekReqDTO.setYestDay(localDateTime);
         yestWeekReqDTO.setYestWeek(yestLocalDateTime);
 
-        List<String> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
+        List<MedicalDepartment> memberAnalysis = orderRepository.selectDepartmentInMemberAnalysis(yestWeekReqDTO);
 
 //        List<Long> hospitalSorted = memberAnalysis.stream()
 //                                                        .sorted()

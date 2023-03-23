@@ -24,13 +24,13 @@ public class Member {
     @Enumerated(value = EnumType.STRING)
     private MedicalDepartment medicalDepartment;
 
-    private Integer hospital;
+    private String hospital;
     private String isMember;
     private LocalDateTime createTime;
     private LocalDateTime deleteTime;
 
     @Builder
-    public Member(String id, String pwd, String name, String phoneNumber, MedicalDepartment medicalDepartment, Integer hospital) {
+    public Member(String id, String pwd, String name, String phoneNumber, MedicalDepartment medicalDepartment, String hospital) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;

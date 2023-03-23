@@ -33,10 +33,7 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
         return jpaQueryFactory
                 .select(
-                        /**
-                         * 여기 수정해야 함 -> 병원명 추출
-                         */
-//                        m.hospital.count().as("hospital")
+                        m.hospital.as("hospital")
                 )
                 .from(m)
                 .where(
@@ -49,16 +46,16 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
     }
 
-    public List<String> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<MedicalDepartment> selectDepartmentInMemberAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QMemberAnalysis m = QMemberAnalysis.memberAnalysis;
 
-        return (List<String>) jpaQueryFactory
+        return (List<MedicalDepartment>) jpaQueryFactory
                 .select(
                         /**
                          * 여기 수정해야 함 -> 진료과명 추출
                          */
-//                        m.medicalDepartment.count().as("medicalDepartment")
+                        m.medicalDepartment.as("medicalDepartment")
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
