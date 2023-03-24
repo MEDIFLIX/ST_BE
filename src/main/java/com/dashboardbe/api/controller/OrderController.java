@@ -37,7 +37,7 @@ public class OrderController {
     /**
      * 주간 진료 병원 순위 get api
      */
-    @Operation(summary = "[주간정보] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다.")
+    @Operation(summary = "[주간정보] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다. 1, 2, 3등 순서대로 출력")
     @GetMapping(value = "selectWeeklyHospital")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyHospital(
@@ -74,7 +74,7 @@ public class OrderController {
     /**
      * 주간 진료 과목 순위 조회 Get api
      */
-    @Operation(summary = "[주간정보] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다.")
+    @Operation(summary = "[주간정보] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다. 1, 2, 3등 순서대로 출력")
     @GetMapping(value = "selectWeeklyDepartment")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<MedicalDepartment>>> selectWeeklyDepartment(
@@ -185,7 +185,7 @@ public class OrderController {
     /**
      * 주간 변동률 수치 계산 api
      */
-    @Operation(summary = "[주간정보] 변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
+    @Operation(summary = "[테스트용] 변동률 조회 API", description = "주간 변동률 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectContentsChanges")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<Long>>> selectContentsChanges(
