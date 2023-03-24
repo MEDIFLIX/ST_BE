@@ -34,7 +34,7 @@ public class OriginalController {
     /**
      * 주간 정보 가져오기 GET
      */
-    @Operation(summary = "[오리지널] 주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
+    @Operation(summary = "[오리지널 대시보드 1번 기능] 주간 정보 조회 API", description = "영상, 진료의 주간 정보를 조회한다.")
     @GetMapping(value = "selectWeeklyInfo")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>> selectWeeklyInfo(

@@ -37,7 +37,7 @@ public class OrderController {
     /**
      * 주간 진료 병원 순위 get api
      */
-    @Operation(summary = "[주간정보] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다. 1, 2, 3등 순서대로 출력")
+    @Operation(summary = "[메인 대시보드 4번 기능] 주간 진료 병원 순위 조회 API", description = "주간 진료 병원 순위를 조회한다. 1, 2, 3등 순서대로 출력")
     @GetMapping(value = "selectWeeklyHospital")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyHospital(
@@ -74,7 +74,7 @@ public class OrderController {
     /**
      * 주간 진료 과목 순위 조회 Get api
      */
-    @Operation(summary = "[주간정보] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다. 1, 2, 3등 순서대로 출력")
+    @Operation(summary = "[메인 대시보드 4번 기능] 주간 진료 과목 순위 조회 API", description = "주간 진료 과목 순위를 조회한다. 1, 2, 3등 순서대로 출력")
     @GetMapping(value = "selectWeeklyDepartment")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<MedicalDepartment>>> selectWeeklyDepartment(
@@ -111,7 +111,7 @@ public class OrderController {
     /**
      * 주간 컨텐츠 순위 변동 get api
      */
-    @Operation(summary = "[주간정보] 컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
+    @Operation(summary = "[메인 대시보드 3번 기능] 컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
 //    @LoginCheck
     public ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>> selectWeeklyContents(
