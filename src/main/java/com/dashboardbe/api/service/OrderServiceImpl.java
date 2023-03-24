@@ -1,10 +1,11 @@
 package com.dashboardbe.api.service;
 
-import com.dashboardbe.api.dto.*;
+import com.dashboardbe.api.dto.ContentsChangesDTO;
+import com.dashboardbe.api.dto.ContentsOrderDTO;
+import com.dashboardbe.api.dto.WeeklyVisitsDTO;
+import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.api.repository.OrderRepository;
-import com.dashboardbe.domain.Category;
 import com.dashboardbe.domain.MedicalDepartment;
-import com.dashboardbe.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

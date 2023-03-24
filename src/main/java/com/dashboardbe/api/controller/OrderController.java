@@ -1,13 +1,10 @@
 package com.dashboardbe.api.controller;
 
-import com.dashboardbe.aop.LoginCheck;
-import com.dashboardbe.api.dto.*;
+import com.dashboardbe.api.dto.ContentsOrderDTO;
+import com.dashboardbe.api.dto.WeeklyVisitsDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OrderService;
-import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
-import com.dashboardbe.domain.Admin;
-import com.dashboardbe.domain.Category;
 import com.dashboardbe.domain.MedicalDepartment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,13 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.yaml.snakeyaml.tokens.ScalarToken;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "*",  allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/order")
@@ -44,16 +39,16 @@ public class OrderController {
             HttpSession session
     ) {
 
-            List<String> memberOrderHospitalDTOList = orderService.selectMemberHospital();
+        List<String> memberOrderHospitalDTOList = orderService.selectMemberHospital();
 
-            return new ResponseEntity<BaseResponseBody<List<String>>>(
-                    new BaseResponseBody<List<String>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            memberOrderHospitalDTOList
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<String>>>(
+                new BaseResponseBody<List<String>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        memberOrderHospitalDTOList
+                ),
+                HttpStatus.OK
+        );
 
     }
 
@@ -67,16 +62,16 @@ public class OrderController {
             HttpSession session
     ) {
 
-            List<MedicalDepartment> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
+        List<MedicalDepartment> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
 
-            return new ResponseEntity<BaseResponseBody<List<MedicalDepartment>>>(
-                    new BaseResponseBody<List<MedicalDepartment>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            memberOrderDepartmentDTOList
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<MedicalDepartment>>>(
+                new BaseResponseBody<List<MedicalDepartment>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        memberOrderDepartmentDTOList
+                ),
+                HttpStatus.OK
+        );
 
     }
 
@@ -90,16 +85,16 @@ public class OrderController {
             HttpSession session
     ) {
 
-            List<ContentsOrderDTO> contentsOrderDTOList = orderService.selectContent();
+        List<ContentsOrderDTO> contentsOrderDTOList = orderService.selectContent();
 
-            return new ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>>(
-                    new BaseResponseBody<List<ContentsOrderDTO>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            contentsOrderDTOList
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>>(
+                new BaseResponseBody<List<ContentsOrderDTO>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        contentsOrderDTOList
+                ),
+                HttpStatus.OK
+        );
 
     }
 
@@ -113,16 +108,16 @@ public class OrderController {
             HttpSession session
     ) {
 
-            List<WeeklyVisitsDTO> weeklyVisitsDTOList = orderService.selectWeeklyVisits();
+        List<WeeklyVisitsDTO> weeklyVisitsDTOList = orderService.selectWeeklyVisits();
 
-            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
-                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            weeklyVisitsDTOList
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
+                new BaseResponseBody<List<WeeklyVisitsDTO>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        weeklyVisitsDTOList
+                ),
+                HttpStatus.OK
+        );
 
     }
 
@@ -140,16 +135,16 @@ public class OrderController {
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
 
-            List<Long> changes = orderService.selectContentChanges();
+        List<Long> changes = orderService.selectContentChanges();
 
-            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-                    new BaseResponseBody<List<Long>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            changes
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<Long>>>(
+                new BaseResponseBody<List<Long>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        changes
+                ),
+                HttpStatus.OK
+        );
 
 //        } else {
 //            return new ResponseEntity<BaseResponseBody<List<Long>>>(

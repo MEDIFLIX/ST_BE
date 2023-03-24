@@ -1,15 +1,9 @@
 package com.dashboardbe.api.repository;
 
-import com.dashboardbe.api.dto.ContentsChangesDTO;
-import com.dashboardbe.api.dto.MemberOrderHospitalDTO;
-import com.dashboardbe.api.dto.YestWeekReqDTO;
 import com.dashboardbe.api.dto.original.OriginalContentsDTO;
-import com.dashboardbe.api.dto.original.OriginalWeeklyInfoDTO;
 import com.dashboardbe.api.dto.original.WeeklyInfoResponseDTO;
 import com.dashboardbe.domain.*;
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -32,7 +26,7 @@ public class OriginalRepository extends QuerydslRepositorySupport {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    public WeeklyInfoResponseDTO selectWeeklyInfo () {
+    public WeeklyInfoResponseDTO selectWeeklyInfo() {
         QContentsAnalysis ca = QContentsAnalysis.contentsAnalysis;
         QMemberAnalysis ma = QMemberAnalysis.memberAnalysis;
 
@@ -50,7 +44,7 @@ public class OriginalRepository extends QuerydslRepositorySupport {
                 .select(ca.contents.id.count())
                 .from(ca)
                 .where(ca.visitDate.between(yestWeek, yestDay)
-                        ,(ca.category.eq(Category.ORIGINAL)))
+                        , (ca.category.eq(Category.ORIGINAL)))
                 .groupBy(ca.contents.id)
                 .orderBy(ca.contents.id.count().desc())
                 .fetchFirst();
@@ -112,9 +106,9 @@ public class OriginalRepository extends QuerydslRepositorySupport {
 
     }
 
-    public List<OriginalContentsDTO.Res> selectContentsInfo (OriginalContentsDTO.Req request) {
+    public List<OriginalContentsDTO.Res> selectContentsInfo(OriginalContentsDTO.Req request) {
 
-    QContents c = QContents.contents;
+        QContents c = QContents.contents;
 
         return jpaQueryFactory
                 .select(

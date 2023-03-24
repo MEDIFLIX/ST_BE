@@ -1,14 +1,10 @@
 package com.dashboardbe.api.controller;
 
-import com.dashboardbe.aop.LoginCheck;
 import com.dashboardbe.api.dto.original.OriginalContentsDTO;
-import com.dashboardbe.api.dto.original.OriginalWeeklyInfoDTO;
 import com.dashboardbe.api.dto.original.WeeklyInfoResponseDTO;
 import com.dashboardbe.api.repository.AdminRepository;
 import com.dashboardbe.api.service.OriginalService;
-import com.dashboardbe.common.SessionUtil;
 import com.dashboardbe.common.response.BaseResponseBody;
-import com.dashboardbe.domain.Admin;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.lang.model.util.Elements;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "*",  allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/original")
@@ -41,17 +35,17 @@ public class OriginalController {
             HttpSession session
     ) {
 
-            WeeklyInfoResponseDTO weeklyInfo = originalService.selectWeeklyInfo();
+        WeeklyInfoResponseDTO weeklyInfo = originalService.selectWeeklyInfo();
 
-            return new ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>>(
-                    new BaseResponseBody<WeeklyInfoResponseDTO>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            weeklyInfo
+        return new ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>>(
+                new BaseResponseBody<WeeklyInfoResponseDTO>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        weeklyInfo
 
-                    ),
-                    HttpStatus.OK
-            );
+                ),
+                HttpStatus.OK
+        );
 
     }
 
@@ -74,16 +68,16 @@ public class OriginalController {
 
         OriginalContentsDTO.Req request = new OriginalContentsDTO.Req(countYn, searchWord);
 
-            List<OriginalContentsDTO.Res> ContentsInfo = originalService.selectContentsInfo(request);
+        List<OriginalContentsDTO.Res> ContentsInfo = originalService.selectContentsInfo(request);
 
-            return new ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>>(
-                    new BaseResponseBody<List<OriginalContentsDTO.Res>>(
-                            HttpStatus.OK.value(),
-                            "성공",
-                            ContentsInfo
-                    ),
-                    HttpStatus.OK
-            );
+        return new ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>>(
+                new BaseResponseBody<List<OriginalContentsDTO.Res>>(
+                        HttpStatus.OK.value(),
+                        "성공",
+                        ContentsInfo
+                ),
+                HttpStatus.OK
+        );
 
 //        } else {
 //            return new ResponseEntity<BaseResponseBody<List<OriginalContentsDTO.Res>>>(
