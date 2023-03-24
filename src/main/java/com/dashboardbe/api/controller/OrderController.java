@@ -114,7 +114,7 @@ public class OrderController {
     @Operation(summary = "[주간정보] 컨텐츠 누적 조회수 순위 조회 API", description = "1 - 3 순위까지의 컨텐츠 조회수 정보를 조회 후 제공한다.")
     @GetMapping(value = "selectWeeklyContents")
 //    @LoginCheck
-    public ResponseEntity<BaseResponseBody<List<Category>>> selectWeeklyContents(
+    public ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>> selectWeeklyContents(
             HttpSession session
     ) {
 //        String loginId = SessionUtil.getLoginId(session);
@@ -122,10 +122,10 @@ public class OrderController {
 //        // 올바른 관리자라면
 //        if (optionalAdmin.isPresent()) {
 
-            List<Category> contentsOrderDTOList = orderService.selectContent();
+            List<ContentsOrderDTO> contentsOrderDTOList = orderService.selectContent();
 
-            return new ResponseEntity<BaseResponseBody<List<Category>>>(
-                    new BaseResponseBody<List<Category>>(
+            return new ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>>(
+                    new BaseResponseBody<List<ContentsOrderDTO>>(
                             HttpStatus.OK.value(),
                             "성공",
                             contentsOrderDTOList

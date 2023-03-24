@@ -12,7 +12,7 @@ public interface OrderService {
 
     List<MedicalDepartment> selectMemberDepartment();
 
-    List<Category> selectContent();
+    List<ContentsOrderDTO> selectContent();
 
     List<WeeklyVisitsDTO> selectWeeklyVisits();
 

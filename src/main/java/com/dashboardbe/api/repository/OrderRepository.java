@@ -63,13 +63,16 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
     }
 
-    public List<Category> findByIdInContentsAnalysis(YestWeekReqDTO yestWeekReqDTO) {
+    public List<ContentsOrderDTO> findByIdInContentsAnalysis(YestWeekReqDTO yestWeekReqDTO) {
 
         QContentsAnalysis m = QContentsAnalysis.contentsAnalysis;
 
-        return (List<Category>) jpaQueryFactory
+        return jpaQueryFactory
                 .select(
-                        m.category.as("category")
+                        Projections.fields(
+                                ContentsOrderDTO.class,
+                                m.category.as("category"),
+                                m.category.count().as("count"))
                 )
                 .from(m)
                 .where(m.visitDate.between(yestWeekReqDTO.getYestWeek(), yestWeekReqDTO.getYestDay()))
