@@ -41,11 +41,6 @@ public class OriginalController {
             HttpSession session
     ) {
 
-//        String loginId = SessionUtil.getLoginId(session);
-//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-//        // 올바른 관리자라면
-//        if (optionalAdmin.isPresent()) {
-
             WeeklyInfoResponseDTO weeklyInfo = originalService.selectWeeklyInfo();
 
             return new ResponseEntity<BaseResponseBody<WeeklyInfoResponseDTO>>(
@@ -57,17 +52,6 @@ public class OriginalController {
                     ),
                     HttpStatus.OK
             );
-
-//        } else {
-//            return new ResponseEntity<BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>>(
-//                    new BaseResponseBody<List<OriginalWeeklyInfoDTO.Res>>(
-//                            HttpStatus.NOT_FOUND.value(),
-//                            "존재하지 않는 Admin ID입니다.",
-//                            null
-//                    ),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
 
     }
 

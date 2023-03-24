@@ -136,8 +136,6 @@ public class OrderRepository extends QuerydslRepositorySupport {
 
                 )
                 .from(m)
-                .leftJoin(c)
-                .on(m.id.eq(c.id.stringValue()))
                 .fetch();
 
     }

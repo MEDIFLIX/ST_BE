@@ -43,10 +43,6 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<String>>> selectWeeklyHospital(
             HttpSession session
     ) {
-//        String loginId = SessionUtil.getLoginId(session);
-//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-//        // 올바른 관리자라면
-//        if (optionalAdmin.isPresent()) {
 
             List<String> memberOrderHospitalDTOList = orderService.selectMemberHospital();
 
@@ -58,17 +54,7 @@ public class OrderController {
                     ),
                     HttpStatus.OK
             );
-//
-//        } else {
-//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-//                    new BaseResponseBody<List<Long>>(
-//                            HttpStatus.NOT_FOUND.value(),
-//                            "존재하지 않는 Admin ID입니다.",
-//                            null
-//                    ),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
+
     }
 
     /**
@@ -80,10 +66,6 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<MedicalDepartment>>> selectWeeklyDepartment(
             HttpSession session
     ) {
-//        String loginId = SessionUtil.getLoginId(session);
-//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-//        // 올바른 관리자라면
-//        if (optionalAdmin.isPresent()) {
 
             List<MedicalDepartment> memberOrderDepartmentDTOList = orderService.selectMemberDepartment();
 
@@ -96,16 +78,6 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-//        } else {
-//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-//                    new BaseResponseBody<List<Long>>(
-//                            HttpStatus.NOT_FOUND.value(),
-//                            "존재하지 않는 Admin ID입니다.",
-//                            null
-//                    ),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
     }
 
     /**
@@ -117,10 +89,6 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<ContentsOrderDTO>>> selectWeeklyContents(
             HttpSession session
     ) {
-//        String loginId = SessionUtil.getLoginId(session);
-//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-//        // 올바른 관리자라면
-//        if (optionalAdmin.isPresent()) {
 
             List<ContentsOrderDTO> contentsOrderDTOList = orderService.selectContent();
 
@@ -133,16 +101,6 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-//        } else {
-//            return new ResponseEntity<BaseResponseBody<List<Long>>>(
-//                    new BaseResponseBody<List<Long>>(
-//                            HttpStatus.NOT_FOUND.value(),
-//                            "존재하지 않는 Admin ID입니다.",
-//                            null
-//                    ),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
     }
 
     /**
@@ -154,10 +112,6 @@ public class OrderController {
     public ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>> selectWeeklyVisits(
             HttpSession session
     ) {
-//        String loginId = SessionUtil.getLoginId(session);
-//        Optional<Admin> optionalAdmin = adminRepository.findById(loginId);
-//        // 올바른 관리자라면
-//        if (optionalAdmin.isPresent()) {
 
             List<WeeklyVisitsDTO> weeklyVisitsDTOList = orderService.selectWeeklyVisits();
 
@@ -170,16 +124,6 @@ public class OrderController {
                     HttpStatus.OK
             );
 
-//        } else {
-//            return new ResponseEntity<BaseResponseBody<List<WeeklyVisitsDTO>>>(
-//                    new BaseResponseBody<List<WeeklyVisitsDTO>>(
-//                            HttpStatus.NOT_FOUND.value(),
-//                            "존재하지 않는 Admin ID입니다.",
-//                            null
-//                    ),
-//                    HttpStatus.NOT_FOUND
-//            );
-//        }
     }
 
     /**
